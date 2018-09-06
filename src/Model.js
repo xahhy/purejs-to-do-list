@@ -5,15 +5,21 @@ class Model {
             TODO: 'TODO', DONE: 'DONE', BLOCKED: 'BLOCKED'
         };
         this.data = [
-            {name: 'Javascript is BullShit !', status: this.status.TODO},
-            {name: 'Javascript is BullShit !!', status: this.status.BLOCKED},
-            {name: 'Javascript is BullShit !!!', status: this.status.BLOCKED},
-            {name: 'Javascript is BullShit !!!', status: this.status.BLOCKED},
-            {name: 'Javascript is BullShit !!!', status: this.status.BLOCKED}
+            {id: 0, name: 'Javascript is BullShit !', status: this.status.TODO},
+            {id: 1,name: 'Javascript is BullShit !!', status: this.status.BLOCKED},
+            {id: 2,name: 'Javascript is BullShit !!!', status: this.status.BLOCKED},
+            {id: 3,name: 'Javascript is BullShit !!!', status: this.status.BLOCKED},
+            {id: 4,name: 'Javascript is BullShit !!!', status: this.status.BLOCKED}
         ];
         this.groupBy = this.groupBy.bind(this);
     }
 
+    addToDoList(name, status){
+        this.data.push({id:this.data.length, name: name, status: status});
+    }
+    removeToDoList(index){
+        this.data = this.data.filter(item=>item.id !== index);
+    }
     groupBy(prop){
         let result = this.data.reduce((groups, item) => {
             groups[item[prop]] = groups[item[prop]] || [];

@@ -6,7 +6,7 @@ class ToDoList {
 
   render() {
     let toDoListBody = this.model.data.map(item=>
-        `<tr><td><input type="text" value="${item.name}"></td>
+        `<tr><td><input type="checkbox" name="${item.id}"><input type="text" value="${item.name}"></td>
 <td><select>
 <option value="${this.model.status.TODO}" ${item.status === this.model.status.TODO ? 'selected' : ''}>${this.model.status.TODO}</option>
 <option value="${this.model.status.DONE}" ${item.status === this.model.status.DONE ? 'selected' : ''}>${this.model.status.DONE}</option>
