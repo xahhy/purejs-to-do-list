@@ -1,7 +1,7 @@
-class BarChart {
-    constructor(store, container) {
-        this.store = store;
-        this.container = container;
+import React from 'react'
+class BarChart extends React.Component{
+    constructor(props) {
+        super(props);
     }
 
     getBarChartData() {
@@ -16,9 +16,11 @@ class BarChart {
 
     render() {
         let {TODONumber,DONENumber,BLOCKEDNumber} = this.getBarChartData();
-        this.container.innerHTML = `<div>${TODONumber}</div>
-<div>${DONENumber}</div>
-<div>${BLOCKEDNumber}</div>`;
+        return (<div>
+            <div>{TODONumber}</div>
+            <div>{DONENumber}</div>
+            <div>{BLOCKEDNumber}</div>
+        </div>)
     }
 }
 
