@@ -1,14 +1,14 @@
 class BarChart {
-    constructor(model, container) {
-        this.model = model;
+    constructor(store, container) {
+        this.store = store;
         this.container = container;
     }
 
     getBarChartData() {
-        let groupedModel = this.model.groupBy('status');
-        let TODONumber = groupedModel[this.model.status.TODO] ? groupedModel[this.model.status.TODO].length : 0;
-        let DONENumber = groupedModel[this.model.status.DONE] ? groupedModel[this.model.status.DONE].length : 0;
-        let BLOCKEDNumber = groupedModel[this.model.status.BLOCKED] ? groupedModel[this.model.status.BLOCKED].length : 0;
+        let groupedModel = this.store.groupBy('status');
+        let TODONumber = groupedModel[this.store.STATUS.TODO] ? groupedModel[this.store.STATUS.TODO].length : 0;
+        let DONENumber = groupedModel[this.store.STATUS.DONE] ? groupedModel[this.store.STATUS.DONE].length : 0;
+        let BLOCKEDNumber = groupedModel[this.store.STATUS.BLOCKED] ? groupedModel[this.store.STATUS.BLOCKED].length : 0;
         return {
             TODONumber,DONENumber,BLOCKEDNumber
         }

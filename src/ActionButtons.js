@@ -1,22 +1,24 @@
-import ToDoList from "./ToDoList";
+import {addTodo} from './actions';
 
 class ActionButtons {
-    constructor(model, container) {
-        this.model = model;
+    constructor(store, container) {
+        this.store = store;
         this.container = container;
         this.addItemCallback = this.addItemCallback.bind(this);
     }
 
     addItemCallback() {
-        this.model.addToDoList('', this.model.status.TODO);
-        this.model.fire();
+        // this.store.addToDoList('', this.store.status.TODO);
+        // this.store.fire();
+        this.store.dispatch(addTodo(''));
     }
 
     deleteItemsCallback(event) {
+        return;
         let inputs = document.querySelectorAll('input[type=checkbox]');
-        let checkedInput = [...inputs].filter(input=>input.checked).map(input=>input.getAttribute('name'));
-        checkedInput.forEach(index=>this.model.removeToDoList(parseInt(index)));
-        this.model.fire();
+        let checkedInput = [...inputs].filter(input => input.checked).map(input => input.getAttribute('name'));
+        checkedInput.forEach(index => this.store.removeToDoList(parseInt(index)));
+        this.store.fire();
     }
 
     render() {

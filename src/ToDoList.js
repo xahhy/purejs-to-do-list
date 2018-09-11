@@ -1,6 +1,8 @@
+import {updateTodo} from "./actions";
+
 class ToDoList {
-    constructor(model, container) {
-        this.model = model;
+    constructor(store, container) {
+        this.store = store;
         this.container = container;
     }
 
@@ -9,17 +11,16 @@ class ToDoList {
         let itemName = itemWraper.querySelector('input').value;
         let itemStatus = itemWraper.querySelector('select').value;
         let itemId = itemWraper.getAttribute('itemId');
-        this.model.updateToDoList(itemId, itemName, itemStatus);
-        this.model.fire();
+        this.store.dispatch(updateTodo(itemId, itemName, itemStatus));
     }
 
     render() {
-        let toDoListBody = this.model.data.map(item =>
+        let toDoListBody = this.store.getState().todos.map(item =>
             `<tr><td><input type="checkbox" name="${item.id}"></td><td class="item" itemId="${item.id}"><input type="text" value="${item.name}">
 <select>
-<option value="${this.model.status.TODO}" ${item.status === this.model.status.TODO ? 'selected' : ''}>${this.model.status.TODO}</option>
-<option value="${this.model.status.DONE}" ${item.status === this.model.status.DONE ? 'selected' : ''}>${this.model.status.DONE}</option>
-<option value="${this.model.status.BLOCKED}" ${item.status === this.model.status.BLOCKED ? 'selected' : ''}>${this.model.status.BLOCKED}</option>
+<option value="${this.store.STATUS.TODO}" ${item.status === this.store.STATUS.TODO ? 'selected' : ''}>${this.store.STATUS.TODO}</option>
+<option value="${this.store.STATUS.DONE}" ${item.status === this.store.STATUS.DONE ? 'selected' : ''}>${this.store.STATUS.DONE}</option>
+<option value="${this.store.STATUS.BLOCKED}" ${item.status === this.store.STATUS.BLOCKED ? 'selected' : ''}>${this.store.STATUS.BLOCKED}</option>
 </select>
 </td>
 </tr>`

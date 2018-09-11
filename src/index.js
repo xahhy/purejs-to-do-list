@@ -2,16 +2,17 @@ import ActionButtons from './ActionButtons';
 import BarChart from './BarChart';
 import ToDoList from './ToDoList';
 import Model from './Model';
+import store from './store';
 
 const startup = () => {
-    const toDoListModel = new Model();
-    new ActionButtons(toDoListModel, document.getElementById('action-buttons')).render();
-    const barChart = new BarChart(toDoListModel, document.getElementById('bar-chart'));
+    // const toDoListModel = new Model();
+    new ActionButtons(store, document.getElementById('action-buttons')).render();
+    const barChart = new BarChart(store, document.getElementById('bar-chart'));
     barChart.render();
-    toDoListModel.subscribe(barChart.render.bind(barChart));
-    const toDoList = new ToDoList(toDoListModel, document.getElementById('to-do-list'));
+    store.subscribe(barChart.render.bind(barChart));
+    const toDoList = new ToDoList(store, document.getElementById('to-do-list'));
     toDoList.render();
-    toDoListModel.subscribe(toDoList.render.bind(toDoList));
+    store.subscribe(toDoList.render.bind(toDoList));
 };
 
 startup();
