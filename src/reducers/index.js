@@ -1,7 +1,8 @@
-
 import { combineReducers } from 'redux'
 import todos from './todos'
+import selected from './selected'
+import barChart from "./barChart";
 
 export default combineReducers({
-    todos
-})
+    todos, selected, barChart
+});

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import ActionButtons from '../components/ActionButtons'
+import BarChart from '../components/BarChart'
 
 const mapStateToProps = (state, ownProps) => ({
+    todos: state.todos
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ActionButtons)
+    mapStateToProps
+)(BarChart)

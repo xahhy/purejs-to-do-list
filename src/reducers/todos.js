@@ -1,7 +1,7 @@
 import store from "../store";
 
-const todos = (state = [], action) => {
-    console.log(state);
+const defaultToDos = [{id: 0, name: 'name', status: 'TODO'}];
+const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
@@ -13,10 +13,12 @@ const todos = (state = [], action) => {
                 }
             ];
         case 'UPDATE_TODO':
-            let updatedTodo = state.find(todo=>todo.id == action.id);
-            updatedTodo.name = action.name;
-            updatedTodo.status = action.status;
-            break;
+            let updatedTodo = state.find(todo => todo.id === action.id);
+            action.name && (updatedTodo.name = action.name);
+            action.status && (updatedTodo.status = action.status);
+            return [...state];
+        case 'DELETE_TODOS':
+            return [...state.filter(item=>action.ids.find(_item=> _item === item.id) === undefined)];
         default:
             break;
     }

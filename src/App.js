@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import ActionButtons from "./container/ActionButtons";
-import ToDoList from "./components/ToDoList";
-import BarChart from "./components/BarChart";
+import ActionButtonsContainer from "./container/ActionButtonsContainer";
+import ToDoListContainer from "./container/ToDoListContainer";
+import BarChartContainer from "./container/BarChartContainer";
 
 class App extends Component {
     constructor(props) {
@@ -11,9 +11,9 @@ class App extends Component {
     render() {
         return (
             <div>
-                <ActionButtons/>
-                {/*<ToDoList/>*/}
-                {/*<BarChart/>*/}
+                <ActionButtonsContainer/>
+                <ToDoListContainer/>
+                <BarChartContainer/>
             </div>
         )
     }

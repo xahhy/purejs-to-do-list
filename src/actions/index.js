@@ -1,10 +1,12 @@
 import store from '../store';
-let todoId = 0;
+import shortid from 'shortid';
+import {groupBy} from '../utils';
+
 export const addTodo = name => ({
     type: 'ADD_TODO',
-    id: todoId++,
+    id: shortid.generate(),
     status: store.STATUS.TODO,
-    name
+    name,
 });
 
 export const updateTodo = (id, name, status) => ({
@@ -12,4 +14,24 @@ export const updateTodo = (id, name, status) => ({
     id,
     name,
     status
+});
+
+export const addSelectedTodo = id => ({
+    type: 'ADD_SELECTED_TODO',
+    id
+});
+
+export const deleteSelectedTodo = id => ({
+    type: 'DELETE_SELECTED_TODO',
+    id
+});
+
+export const deleteTodos = ids => ({
+    type: 'DELETE_TODOS',
+    ids
+});
+
+export const getTodoChart = todos => ({
+    type: 'GET_TODO_CHART',
+    chart: groupBy(todos, 'status')
 });

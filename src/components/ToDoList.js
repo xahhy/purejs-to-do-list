@@ -1,37 +1,53 @@
 import {updateTodo} from '../actions/index';
 import React from 'react';
-class ToDoList extends React.Component{
+import store from '../store';
+
+class ToDoList extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    updateToDoList(event) {
-        let itemWrapper = event.currentTarget;
-        let itemName = itemWrapper.querySelector('input').value;
-        let itemStatus = itemWrapper.querySelector('select').value;
-        let itemId = itemWrapper.getAttribute('itemId');
-        this.store.dispatch(updateTodo(itemId, itemName, itemStatus));
-    }
+    updateToDoName = (event, id) => {
+        this.props.updateTodo(id, event.target.value)
+    };
+
+    updateToDoStatus = (event, id) => {
+        this.props.updateTodo(id, null, event.target.value)
+    };
+
+    handleSelected = (event, id) => {
+        event.target.checked ? this.props.addSelectedTodo(id) : this.props.deleteSelectedTodo(id);
+    };
 
     render() {
         return (
             <table>
-            {this.store.getState().todos.map(item =>
-            `<tr><td><input type="checkbox" name="${item.id}"></td><td class="item" itemId="${item.id}" ><input type="text" value="${item.name}">
-<select>
-<option value="${this.store.STATUS.TODO}" ${item.status === this.store.STATUS.TODO ? 'selected' : ''}>${this.store.STATUS.TODO}</option>
-<option value="${this.store.STATUS.DONE}" ${item.status === this.store.STATUS.DONE ? 'selected' : ''}>${this.store.STATUS.DONE}</option>
-<option value="${this.store.STATUS.BLOCKED}" ${item.status === this.store.STATUS.BLOCKED ? 'selected' : ''}>${this.store.STATUS.BLOCKED}</option>
-</select>
-</td>
-</tr>`
-        ).join('')}
+                <tbody>
+                {this.props.todos.map(item =>
+                    <tr key={item.id}>
+                        <td><input type="checkbox" name={item.id} onChange={event => this.handleSelected(event, item.id)}/></td>
+                        <td className="item" item-id={item.id}>
+                            <input type="text" defaultValue={item.name}
+                            onBlur={event => this.updateToDoName(event, item.id)}
+                            />
+                            <select value={item.status} onChange={event => this.updateToDoStatus(event, item.id)}>
+                                <option
+                                    value={store.STATUS.TODO} >{store.STATUS.TODO}</option>
+                                <option
+                                    value={store.STATUS.DONE} >{store.STATUS.DONE}</option>
+                                <option
+                                    value={store.STATUS.BLOCKED} >{store.STATUS.BLOCKED}</option>
+                            </select>
+                        </td>
+                    </tr>
+                )}
+                </tbody>
             </table>
-    )
+        )
     }
 
-    componentDidMount(){
-        document.querySelectorAll('.item').forEach(input => input.addEventListener('focusout', this.updateToDoList.bind(this)))
+    componentDidMount() {
+        // document.querySelectorAll('.item').forEach(input => input.addEventListener('focusout', this.updateToDoList.bind(this)))
     }
 }
 
