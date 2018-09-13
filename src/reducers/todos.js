@@ -5,12 +5,14 @@ const defaultToDos = {todos: [new Todo(0, 'name', 'TODO')], visible: []};
 const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':
+            const todos = [
+                ...state.todos,
+                new Todo(action.id, action.name, action.status)
+            ];
             return {
                 ...state,
-                todos: [
-                    ...state.todos,
-                    new Todo(action.id, action.name, action.status)
-                ]
+                todos,
+                visible: [...state.visible, action.id]
             };
         case 'UPDATE_TODO':
             return {
@@ -24,7 +26,15 @@ const todos = (state = defaultToDos, action) => {
         case 'DELETE_TODOS':
             return {
                 ...state,
-                todos: [...state.todos.filter(item => action.ids.find(_item => _item === item.id) === undefined)]
+                todos: [...state.todos.filter(item => action.ids.find(_item => _item === item.id) === undefined)],
+                visible: state.visible.filter(id=> action.ids.find(_item=>_item === id) === undefined)
+            };
+        case 'FILTER_BY_NAME':
+            return {
+                ...state,
+                todos:[
+
+                ]
             };
         default:
             break;

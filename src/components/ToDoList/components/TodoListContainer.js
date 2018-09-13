@@ -11,7 +11,7 @@ import {
 } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    todos: state.todos.todos
+    todos: state.todos
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
