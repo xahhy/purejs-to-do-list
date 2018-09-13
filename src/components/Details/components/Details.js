@@ -49,7 +49,7 @@ class Details extends React.Component {
         this.props.toggleDetail(false);
     };
 
-    updateToDoStatus = (event, id) => {
+    updateToDoStatus = (event) => {
         this.state.todo.status = event.target.value;
         this.setState({todo: this.state.todo});
     };
@@ -71,14 +71,15 @@ class Details extends React.Component {
 
     render() {
         this.state = {...this.state, todo: this.props.details.todo, tags: this.props.details.todo.tags};
-        const { classes, theme } = this.props;
+        const { classes, theme, details } = this.props;
+        const {todo} = details;
         return (
             <Dialog
-                open={this.props.details.show}
+                open={details.show}
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Details of Action - {this.props.title} </DialogTitle>
+                <DialogTitle id="form-dialog-title">Details of Action - {todo.name} </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         You can change action's details here.
@@ -92,7 +93,7 @@ class Details extends React.Component {
                             autoFocus
                             margin="dense"
                             label="Action"
-                            defaultValue={this.props.details.todo.name}
+                            defaultValue={todo.name}
                             onChange={(event) => this.handleChangeTodoName(event)}
                         />
                         <TextField
@@ -105,8 +106,8 @@ class Details extends React.Component {
                             onChange={(event) => this.handleChangeTodoDueDate(event)}
                         />
                         <Select
-                            value={this.props.details.todo.status}
-                            onChange={event => this.updateToDoStatus(event, this.props.item.id)}
+                            value={todo.status}
+                            onChange={event => this.updateToDoStatus(event)}
                         >
                             <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
                             <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
