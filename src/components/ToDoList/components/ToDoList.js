@@ -10,6 +10,8 @@ import Checkbox from '@material-ui/core/Checkbox/Checkbox';
 import TextField from '@material-ui/core/TextField/TextField';
 import Select from '@material-ui/core/Select/Select';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
+import TableHead from '@material-ui/core/TableHead/TableHead';
+import Button from '@material-ui/core/Button/Button';
 
 const styles = theme => ({
     table: {
@@ -34,23 +36,37 @@ class ToDoList extends React.Component {
         event.target.checked ? this.props.addSelectedTodo(id) : this.props.deleteSelectedTodo(id);
     };
 
+    deleteTodo = (id) => {
+        this.props.deleteTodos([id])
+    };
+
     render() {
         const {classes} = this.props;
         return (
             <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Action</TableCell>
+                        <TableCell >Tags</TableCell>
+                        <TableCell >Due Date</TableCell>
+                        <TableCell >Status</TableCell>
+                        <TableCell >Actions</TableCell>
+                    </TableRow>
+                </TableHead>
                 <TableBody>
                     {this.props.todos.map(item =>
                         <TableRow key={item.id}>
-                            <TableCell padding='checkbox'>
-                                <Checkbox
-                                    onChange={event => this.handleSelected(event, item.id)}
-                                />
-                            </TableCell>
                             <TableCell className="item" item-id={item.id} padding='none'>
                                 <TextField placeholder={'Please add something todo...'}
                                            onBlur={event => this.updateToDoName(event, item.id)}
                                            fullWidth={true}
                                 />
+                            </TableCell>
+                            <TableCell>
+                                Tags...
+                            </TableCell>
+                            <TableCell>
+                                Date...
                             </TableCell>
                             <TableCell padding='none'>
                                 <Select
@@ -61,6 +77,10 @@ class ToDoList extends React.Component {
                                     <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
                                     <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
                                 </Select>
+                            </TableCell>
+                            <TableCell>
+                                <Button variant='contained' color='primary'>Details</Button>
+                                <Button variant='contained' color='secondary' onClick={()=>this.deleteTodo(item.id)}>Delete</Button>
                             </TableCell>
                         </TableRow>
                     )}
