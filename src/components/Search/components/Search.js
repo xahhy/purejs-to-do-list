@@ -3,24 +3,38 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import SearchIcorn from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search';
 
-class Search extends React.Component{
+class Search extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {keyWord: ''}
+    }
+
     render() {
         return (
-                <FormControl>
-                    <Input
-                        placeholder={'Search Words'}
-                        startAdornment={
-                            <InputAdornment position="start">
+            <FormControl>
+                <Input
+                    placeholder={'Search Words'}
+                    startAdornment={
+                        <InputAdornment position="start">
                             <IconButton>
-                                <SearchIcorn/>
+                                <SearchIcon/>
                             </IconButton>
                         </InputAdornment>
-                        }
-                    />
-                </FormControl>
+                    }
+                    onChange={event => this.handleChangeSearch(event)}
+                    value={this.state.keyWord}
+                />
+            </FormControl>
         );
     }
+
+    handleChangeSearch = (event) => {
+        this.setState({keyWord: event.target.value});
+        this.props.filterByName(event.target.value);
+    };
 }
+
 export default Search;

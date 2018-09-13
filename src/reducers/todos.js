@@ -1,7 +1,6 @@
-import store from '../store';
 import Todo from '../data/Todo';
 
-const defaultToDos = {todos: [new Todo(0, 'name', 'TODO')], visible: []};
+const defaultToDos = {todos: [new Todo(0, 'name', 'TODO')], visible: [0]};
 const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':
@@ -32,9 +31,7 @@ const todos = (state = defaultToDos, action) => {
         case 'FILTER_BY_NAME':
             return {
                 ...state,
-                todos:[
-
-                ]
+                visible: state.todos.filter(todo=>todo.name.includes(action.keyWord)).map(todo=>todo.id)
             };
         default:
             break;

@@ -43,3 +43,8 @@ export const setCurrentTodoForDetail = todo => ({
     type: 'SET_CURRENT_TODO',
     todo
 });
+
+export const filterByName = keyWord => ({
+    type: 'FILTER_BY_NAME',
+    keyWord
+});
