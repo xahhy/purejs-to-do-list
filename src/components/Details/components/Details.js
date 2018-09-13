@@ -114,7 +114,7 @@ class Details extends React.Component {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            defaultValue={this.state.todo ? this.state.todo.dueDate : '2018-10-01'}
+                            value={this.state.todo.dueDate ? this.state.todo.dueDate : '2018-10-01'}
                             onChange={(event) => this.handleChangeTodoDueDate(event)}
                             fullWidth={true}
                         />
