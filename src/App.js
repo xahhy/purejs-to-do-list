@@ -3,6 +3,7 @@ import ActionButtons from './components/ActionButtons';
 import ToDoList from './components/ToDoList';
 import BarChart from './components/BarChart';
 import Grid from '@material-ui/core/Grid/Grid';
+import Details from './components/Details'
 
 class App extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component {
                         <ActionButtons/>
                         <ToDoList/>
                         <BarChart/>
+                        <Details/>
                     </Grid>
                 </Grid>
             </Grid>

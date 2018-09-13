@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select/Select';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
+import Chip from '@material-ui/core/Chip/Chip';
 
 const styles = theme => ({
     table: {
@@ -24,20 +25,23 @@ class ToDoList extends React.Component {
         super(props);
     }
 
-    updateToDoName = (event, id) => {
-        this.props.updateTodo(id, event.target.value)
+    updateToDoName = (event, item) => {
+        item.name = event.target.value;
+        this.props.updateTodo(item)
     };
 
-    updateToDoStatus = (event, id) => {
-        this.props.updateTodo(id, null, event.target.value)
-    };
-
-    handleSelected = (event, id) => {
-        event.target.checked ? this.props.addSelectedTodo(id) : this.props.deleteSelectedTodo(id);
+    updateToDoStatus = (event, item) => {
+        item.status = event.target.value;
+        this.props.updateTodo(item)
     };
 
     deleteTodo = (id) => {
         this.props.deleteTodos([id])
+    };
+
+    handleClickDetail = (todo) => {
+        this.props.setCurrentTodoForDetail(todo);
+        this.props.toggleDetail(true);
     };
 
     render() {
@@ -47,10 +51,10 @@ class ToDoList extends React.Component {
                 <TableHead>
                     <TableRow>
                         <TableCell>Action</TableCell>
-                        <TableCell >Tags</TableCell>
-                        <TableCell >Due Date</TableCell>
-                        <TableCell >Status</TableCell>
-                        <TableCell >Actions</TableCell>
+                        <TableCell>Tags</TableCell>
+                        <TableCell>Due Date</TableCell>
+                        <TableCell>Status</TableCell>
+                        <TableCell>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -58,20 +62,23 @@ class ToDoList extends React.Component {
                         <TableRow key={item.id}>
                             <TableCell className="item" item-id={item.id} padding='none'>
                                 <TextField placeholder={'Please add something todo...'}
-                                           onBlur={event => this.updateToDoName(event, item.id)}
+                                           onChange={event => this.updateToDoName(event, item)}
                                            fullWidth={true}
+                                           value={item.name}
                                 />
                             </TableCell>
                             <TableCell>
-                                Tags...
+                                {item.tags.map(value => (
+                                    <Chip key={value} label={value}/>
+                                ))}
                             </TableCell>
                             <TableCell>
-                                Date...
+                                {item.dueDate}
                             </TableCell>
                             <TableCell padding='none'>
                                 <Select
                                     value={item.status}
-                                    onChange={event => this.updateToDoStatus(event, item.id)}
+                                    onChange={event => this.updateToDoStatus(event, item)}
                                 >
                                     <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
                                     <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
@@ -79,8 +86,13 @@ class ToDoList extends React.Component {
                                 </Select>
                             </TableCell>
                             <TableCell>
-                                <Button variant='contained' color='primary'>Details</Button>
-                                <Button variant='contained' color='secondary' onClick={()=>this.deleteTodo(item.id)}>Delete</Button>
+                                <Button variant='contained' color='primary'
+                                        onClick={() => this.handleClickDetail(item)}
+                                >
+                                    Details
+                                </Button>
+                                <Button variant='contained' color='secondary'
+                                        onClick={() => this.deleteTodo(item.id)}>Delete</Button>
                             </TableCell>
                         </TableRow>
                     )}

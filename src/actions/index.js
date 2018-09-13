@@ -9,11 +9,9 @@ export const addTodo = name => ({
     name,
 });
 
-export const updateTodo = (id, name, status) => ({
+export const updateTodo = (todo) => ({
     type: 'UPDATE_TODO',
-    id,
-    name,
-    status
+    todo
 });
 
 export const addSelectedTodo = id => ({
@@ -34,4 +32,14 @@ export const deleteTodos = ids => ({
 export const getTodoChart = todos => ({
     type: 'GET_TODO_CHART',
     chart: groupBy(todos, 'status')
+});
+
+export const toggleDetail = show => ({
+    type: 'TOGGLE_DETAIL',
+    show
+});
+
+export const setCurrentTodoForDetail = todo => ({
+    type: 'SET_CURRENT_TODO',
+    todo
 });
