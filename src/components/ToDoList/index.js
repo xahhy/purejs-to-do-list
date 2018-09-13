@@ -1,3 +1,3 @@
-import View from './components/ToDoListContainer';
+import View from './components/TodoListContainer';
 
 export default View;

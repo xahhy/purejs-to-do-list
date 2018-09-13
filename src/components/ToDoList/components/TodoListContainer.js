@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ToDoList from './ToDoList'
+import FilteredTodoList from './FilteredTodoList'
 import {
     addSelectedTodo,
     addTodo,
@@ -11,7 +11,7 @@ import {
 } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    todos: state.todos
+    todos: state.todos.todos
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 export default connect(
     mapStateToProps, mapDispatchToProps
-)(ToDoList)
+)(FilteredTodoList)

@@ -4,6 +4,7 @@ import ToDoList from './components/ToDoList';
 import BarChart from './components/BarChart';
 import Grid from '@material-ui/core/Grid/Grid';
 import Details from './components/Details'
+import Search from './components/Search'
 
 class App extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class App extends Component {
                         {/*</Grid>*/}
                         {/*))}*/}
                         <ActionButtons/>
+                        <Search/>
                         <ToDoList/>
                         <BarChart/>
                         <Details/>

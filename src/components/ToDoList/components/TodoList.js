@@ -20,7 +20,7 @@ const styles = theme => ({
     }
 });
 
-class ToDoList extends React.Component {
+class TodoList extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -106,4 +106,4 @@ class ToDoList extends React.Component {
     }
 }
 
-export default withStyles(styles)(ToDoList);
+export default withStyles(styles)(TodoList);

@@ -1,20 +1,31 @@
 import store from '../store';
 import Todo from '../data/Todo';
 
-const defaultToDos = [new Todo(0, 'name', 'TODO')];
+const defaultToDos = {todos: [new Todo(0, 'name', 'TODO')], visible: []};
 const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            return [
+            return {
                 ...state,
-                new Todo(action.id, action.name, action.status)
-            ];
+                todos: [
+                    ...state.todos,
+                    new Todo(action.id, action.name, action.status)
+                ]
+            };
         case 'UPDATE_TODO':
-            let updatedTodo = state.find(todo => todo.id === action.todo.id);
-            updatedTodo = action.todo;
-            return [...state];
+            return {
+                ...state,
+                todos: state.todos.map(todo => {
+                    if (todo.id === action.todo.id) {
+                        return action.todo;
+                    } else return todo;
+                })
+            };
         case 'DELETE_TODOS':
-            return [...state.filter(item=>action.ids.find(_item=> _item === item.id) === undefined)];
+            return {
+                ...state,
+                todos: [...state.todos.filter(item => action.ids.find(_item => _item === item.id) === undefined)]
+            };
         default:
             break;
     }

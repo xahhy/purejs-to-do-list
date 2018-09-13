@@ -14,6 +14,7 @@ import Todo from '../../../data/Todo';
 import Chip from '@material-ui/core/Chip/Chip';
 import Input from '@material-ui/core/Input/Input';
 import {withStyles} from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 
 const styles = theme => ({
     root: {
@@ -40,12 +41,16 @@ class Details extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {tags: []}
+        this.state = {tags: [], todo: new Todo()};
     }
 
     handleClose = () => {
-        console.log(this.state.todo);
-        this.props.updateTodo(this.state.todo);
+        this.setState({tags:[], todo:new Todo()});
+        this.props.toggleDetail(false);
+    };
+
+    handleSave = () => {
+        this.props.updateTodo({...this.state.todo});
         this.props.toggleDetail(false);
     };
 
@@ -69,17 +74,22 @@ class Details extends React.Component {
         this.setState({todo: this.state.todo, tags: event.target.value});
     };
 
+    handleOnEnter = () => {
+        this.setState({todo: {...this.props.details.todo}, tags: [...this.props.details.todo.tags]});
+    };
+
     render() {
-        this.state = {...this.state, todo: this.props.details.todo, tags: this.props.details.todo.tags};
         const { classes, theme, details } = this.props;
         const {todo} = details;
+        const {todo: _todo} = this.state;
         return (
             <Dialog
                 open={details.show}
                 onClose={this.handleClose}
+                onEnter={this.handleOnEnter}
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Details of Action - {todo.name} </DialogTitle>
+                <DialogTitle id="form-dialog-title">Details of Action - {details.backupTodo.name} </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         You can change action's details here.
@@ -93,31 +103,42 @@ class Details extends React.Component {
                             autoFocus
                             margin="dense"
                             label="Action"
-                            defaultValue={todo.name}
+                            value={_todo.name ? _todo.name : ''}
                             onChange={(event) => this.handleChangeTodoName(event)}
+                            InputLabelProps={{ shrink: true }}
+                            fullWidth={true}
                         />
                         <TextField
-                            id="date"
                             label="Due Date"
                             type="date"
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            defaultValue={this.state.todo ? this.state.todo.dueDate : '2018-10-01'}
                             onChange={(event) => this.handleChangeTodoDueDate(event)}
+                            fullWidth={true}
                         />
+                        <InputLabel shrink htmlFor="status-label-placeholder">
+                            Status
+                        </InputLabel>
                         <Select
                             value={todo.status}
                             onChange={event => this.updateToDoStatus(event)}
+                            input={<Input id="status-label-placeholder"/>}
+                            fullWidth={true}
                         >
                             <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
                             <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
                             <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
                         </Select>
+                        <InputLabel shrink htmlFor="select-multiple-tags">
+                            Tags
+                        </InputLabel>
                         <Select
                             multiple
                             value={this.state.tags}
                             onChange={this.handleChangeTags}
-                            input={<Input id="select-multiple-chip"/>}
+                            input={<Input id="select-multiple-tags"/>}
                             renderValue={selected => (
                                 <div>
                                     {selected.map(value => (
@@ -125,6 +146,7 @@ class Details extends React.Component {
                                     ))}
                                 </div>
                             )}
+                            fullWidth={true}
                         >{
                             tags.map(name =>
                                 <MenuItem
@@ -148,8 +170,8 @@ class Details extends React.Component {
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
-                        Subscribe
+                    <Button onClick={this.handleSave} color="primary">
+                        Save
                     </Button>
                 </DialogActions>
             </Dialog>
