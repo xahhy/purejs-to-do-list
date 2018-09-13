@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import ActionButtons from '../components/ActionButtons'
-import {addTodo, deleteTodos} from "../actions";
+import ActionButtons from './ActionButtons'
+import {addTodo, deleteTodos} from "../../../actions/index";
 
 const mapStateToProps = (state, ownProps) => ({
     selected: state.selected

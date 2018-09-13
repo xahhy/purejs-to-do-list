@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import BarChart from '../components/BarChart'
+import BarChart from './BarChart'
 
 const mapStateToProps = (state, ownProps) => ({
     todos: state.todos

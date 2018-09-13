@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import ActionButtonsContainer from "./container/ActionButtonsContainer";
-import ToDoListContainer from "./container/ToDoListContainer";
-import BarChartContainer from "./container/BarChartContainer";
+import ActionButtons from './components/ActionButtons';
+import ToDoList from './components/ToDoList';
+import BarChart from './components/BarChart';
+import Grid from '@material-ui/core/Grid/Grid';
 
 class App extends Component {
     constructor(props) {
@@ -10,14 +11,22 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <ActionButtonsContainer/>
-                <ToDoListContainer/>
-                <BarChartContainer/>
-            </div>
+            <Grid container spacing={16}>
+                <Grid item xs={12}>
+                    <Grid container justify='center' direction={'column'} alignItems={'center'}>
+                        {/*{[0, 1, 2].map(value => (*/}
+                        {/*<Grid key={value} item>*/}
+                        {/*<Paper className={classes.paper} />*/}
+                        {/*</Grid>*/}
+                        {/*))}*/}
+                        <ActionButtons/>
+                        <ToDoList/>
+                        <BarChart/>
+                    </Grid>
+                </Grid>
+            </Grid>
         )
     }
-
 }
 
 export default App;
