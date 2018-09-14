@@ -35,7 +35,7 @@ class App extends Component {
                     <Grid container justify='center' direction={'column'} alignItems={'center'}>
                         <Tabs value={this.state.tab} onChange={this.handleChangeTabs}>
                             <Tab label="To dos" component={Link} to={'/'}/>
-                            <Tab label="Item Two" component={Link} to={'/statistic'}/>
+                            <Tab label="Statistic" component={Link} to={'/statistic'}/>
                         </Tabs>
                         <Search/>
                         {

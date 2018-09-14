@@ -1,6 +1,7 @@
 import Todo from '../data/Todo';
+import {STATUS} from '../utils';
 
-const defaultToDos = {todos: [new Todo(0, 'name', 'TODO')], visible: [0]};
+const defaultToDos = {todos: [new Todo(0, 'name', STATUS.TODO)], visible: [0]};
 const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':

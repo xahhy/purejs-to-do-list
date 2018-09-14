@@ -1,14 +1,14 @@
 import React from 'react'
-import store from '../../../store/index';
 import {groupBy} from '../../../utils/index';
 import {Pie} from 'react-chartjs-2';
+import {STATUS} from '../../../utils';
 
 class BarChart extends React.Component {
 
     getBarChartData = (groupedModel) => {
-        let TODONumber = groupedModel[store.STATUS.TODO] ? groupedModel[store.STATUS.TODO].length : 0;
-        let DONENumber = groupedModel[store.STATUS.DONE] ? groupedModel[store.STATUS.DONE].length : 0;
-        let BLOCKEDNumber = groupedModel[store.STATUS.BLOCKED] ? groupedModel[store.STATUS.BLOCKED].length : 0;
+        let TODONumber = groupedModel[STATUS.TODO] ? groupedModel[STATUS.TODO].length : 0;
+        let DONENumber = groupedModel[STATUS.IN_PROGRESS] ? groupedModel[STATUS.IN_PROGRESS].length : 0;
+        let BLOCKEDNumber = groupedModel[STATUS.BLOCKED] ? groupedModel[STATUS.BLOCKED].length : 0;
         return {
             TODONumber, DONENumber, BLOCKEDNumber
         }
@@ -28,7 +28,7 @@ class BarChart extends React.Component {
                 value: DONENumber,
                 color: '#46BFBD',
                 highlight: '#5AD3D1',
-                label: 'DONE'
+                label: 'IN_PROGRESS'
             },
             {
                 value: BLOCKEDNumber,
@@ -55,26 +55,28 @@ class BarChart extends React.Component {
         };
         const data = {
             labels: [
-                'TODO',
-                'DONE',
-                'BLOCKED'
+                'In progress',
+                'Blocked',
+                'To do'
             ],
             datasets: [{
-                data: [TODONumber, DONENumber, BLOCKEDNumber],
+                data: [DONENumber, BLOCKEDNumber, TODONumber],
                 backgroundColor: [
+                    '#33eb14',
                     '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    '#8d4dff'
                 ],
                 hoverBackgroundColor: [
+                    '#33eb14',
                     '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    '#8d4dff'
                 ]
             }]
         };
         return (
-            <Pie data={data} width="600" height="250"/>
+            <Pie data={data} width={600} height={250} options={{
+                maintainAspectRatio: false
+            }}/>
         );
     }
 }

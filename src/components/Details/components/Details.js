@@ -8,13 +8,13 @@ import DialogActions from '@material-ui/core/DialogActions/DialogActions';
 import Button from '@material-ui/core/Button/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import store from '../../../store';
 import Select from '@material-ui/core/Select/Select';
 import Todo from '../../../data/Todo';
 import Chip from '@material-ui/core/Chip/Chip';
 import Input from '@material-ui/core/Input/Input';
 import {withStyles} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
+import {STATUS} from '../../../utils';
 
 const styles = theme => ({
     root: {
@@ -138,9 +138,9 @@ class Details extends React.Component {
                                     id: 'todo-status',
                                 }}
                             >
-                                <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
-                                <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
-                                <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
+                                <MenuItem value={STATUS.TODO}>{STATUS.TODO}</MenuItem>
+                                <MenuItem value={STATUS.IN_PROGRESS}>{STATUS.IN_PROGRESS}</MenuItem>
+                                <MenuItem value={STATUS.BLOCKED}>{STATUS.BLOCKED}</MenuItem>
                             </Select>
                         </Grid>
                         <Grid item xs={12}>

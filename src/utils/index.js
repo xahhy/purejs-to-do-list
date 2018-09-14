@@ -1,3 +1,4 @@
+
 export const groupBy = (list, prop) => {
     const result = list.reduce((groups, item) => {
         groups[item[prop]] = groups[item[prop]] || [];
@@ -6,3 +7,6 @@ export const groupBy = (list, prop) => {
     }, {});
     return result;
 };
+
+export const STATUS = {TODO: 'To do', IN_PROGRESS: 'In progress', BLOCKED: 'Blocked'};
+

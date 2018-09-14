@@ -2,7 +2,7 @@ class Model {
     constructor() {
         this.handlers = [];
         this.status = {
-            TODO: 'TODO', DONE: 'DONE', BLOCKED: 'BLOCKED'
+            TODO: 'TODO', DONE: 'IN_PROGRESS', BLOCKED: 'BLOCKED'
         };
         this.data = [
             // {id: 0, name: 'Javascript is BullShit !', status: this.status.TODO},

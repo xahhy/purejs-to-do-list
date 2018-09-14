@@ -1,11 +1,10 @@
-import store from '../store';
 import shortid from 'shortid';
-import {groupBy} from '../utils';
+import {groupBy, STATUS} from '../utils';
 
 export const addTodo = name => ({
     type: 'ADD_TODO',
     id: shortid.generate(),
-    status: store.STATUS.TODO,
+    status: STATUS.TODO,
     name,
 });
 
