@@ -17,27 +17,6 @@ class BarChart extends React.Component {
     render() {
         console.log(this.props.todos);
         const {TODONumber, DONENumber, BLOCKEDNumber} = this.getBarChartData(groupBy(this.props.todos, 'status'));
-        const chartData = [
-            {
-                value: TODONumber,
-                color: '#F7464A',
-                highlight: '#FF5A5E',
-                label: 'TODO'
-            },
-            {
-                value: DONENumber,
-                color: '#46BFBD',
-                highlight: '#5AD3D1',
-                label: 'IN_PROGRESS'
-            },
-            {
-                value: BLOCKEDNumber,
-                color: '#FDB45C',
-                highlight: '#5AD3D1',
-                label: 'BLOCKED'
-            },
-        ];
-
         const chartOptions = {
             maintainAspectRatio: false,
             plugins: {
@@ -46,12 +25,12 @@ class BarChart extends React.Component {
                     color: 'white'
                 }
             },
-            title: {
-                display: true,
-                text: "Chore Distribution for this Month",
-                fontFamily: "Roboto",
-                fontSize: 20,
-            }
+            // title: {
+            //     display: true,
+            //     text: "Chore Distribution for this Month",
+            //     fontFamily: "Roboto",
+            //     fontSize: 20,
+            // }
         };
         const data = {
             labels: [
@@ -63,20 +42,18 @@ class BarChart extends React.Component {
                 data: [DONENumber, BLOCKEDNumber, TODONumber],
                 backgroundColor: [
                     '#33eb14',
-                    '#FF6384',
+                    '#F7464A',
                     '#8d4dff'
                 ],
                 hoverBackgroundColor: [
                     '#33eb14',
-                    '#FF6384',
+                    '#F7464A',
                     '#8d4dff'
                 ]
             }]
         };
         return (
-            <Pie data={data} width={600} height={250} options={{
-                maintainAspectRatio: false
-            }}/>
+            <Pie data={data} width={500} height={250} options={chartOptions}/>
         );
     }
 }

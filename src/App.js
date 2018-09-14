@@ -18,38 +18,41 @@ function TabContainer({children, dir}) {
     );
 }
 
+const styles = {
+    container: {
+        maxWidth: 1000
+    }
+};
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {tab: 0}
     }
 
-    handleChangeTabs = (event, value)=> {
+    handleChangeTabs = (event, value) => {
         this.setState({tab: value})
     };
+
     render() {
         const {tab} = this.state;
         return (
-            <Grid container spacing={16}>
-                <Grid item xs={12}>
-                    <Grid container justify='center' direction={'column'} alignItems={'center'}>
-                        <Tabs value={this.state.tab} onChange={this.handleChangeTabs}>
-                            <Tab label="To dos" component={Link} to={'/'}/>
-                            <Tab label="Statistic" component={Link} to={'/statistic'}/>
-                        </Tabs>
-                        <Search/>
-                        {
-                            tab === 0 && <TabContainer>
-                            <ToDoList/>
-                            <ActionButtons/>
-                            <Details/>
-                            </TabContainer>
-                        }
-                        {
-                            tab === 1 && <BarChart/>
-                        }
-                    </Grid>
-                </Grid>
+            <Grid container justify='center' direction={'column'} alignItems={'center'}>
+                <Tabs value={this.state.tab} onChange={this.handleChangeTabs}>
+                    <Tab label="To dos" component={Link} to={'/'}/>
+                    <Tab label="Statistic" component={Link} to={'/statistic'}/>
+                </Tabs>
+                <Search/>
+                {
+                    tab === 0 && <TabContainer>
+                        <ToDoList/>
+                        <ActionButtons/>
+                        <Details/>
+                    </TabContainer>
+                }
+                {
+                    tab === 1 && <BarChart/>
+                }
             </Grid>
         )
     }

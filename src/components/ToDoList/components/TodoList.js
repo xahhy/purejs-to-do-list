@@ -16,7 +16,7 @@ import Chip from '@material-ui/core/Chip/Chip';
 
 const styles = theme => ({
     table: {
-        maxWidth: 1000,
+        // maxWidth: 1000,
     },
     row: {
         '&:nth-of-type(odd)': {
