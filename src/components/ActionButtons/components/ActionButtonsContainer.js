@@ -7,7 +7,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    deleteSelectedTodos: selected => dispatch(deleteTodos(selected)),
     addTodo: name => dispatch(addTodo(name))
 });
 

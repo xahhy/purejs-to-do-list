@@ -16,8 +16,13 @@ import Chip from '@material-ui/core/Chip/Chip';
 
 const styles = theme => ({
     table: {
-        maxWidth: 1000
-    }
+        maxWidth: 1000,
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
 });
 
 class TodoList extends React.Component {
@@ -59,13 +64,9 @@ class TodoList extends React.Component {
                 </TableHead>
                 <TableBody>
                     {this.props.todos.map(item =>
-                        <TableRow key={item.id}>
+                        <TableRow key={item.id} className={classes.row}>
                             <TableCell className="item" item-id={item.id} padding='none'>
-                                <TextField placeholder={'Please add something todo...'}
-                                           onChange={event => this.updateToDoName(event, item)}
-                                           fullWidth={true}
-                                           value={item.name}
-                                />
+                                {item.name}
                             </TableCell>
                             <TableCell>
                                 {item.tags.map(value => (
@@ -76,14 +77,7 @@ class TodoList extends React.Component {
                                 {item.dueDate}
                             </TableCell>
                             <TableCell padding='none'>
-                                <Select
-                                    value={item.status}
-                                    onChange={event => this.updateToDoStatus(event, item)}
-                                >
-                                    <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
-                                    <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
-                                    <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
-                                </Select>
+                                {item.status}
                             </TableCell>
                             <TableCell>
                                 <Button variant='contained' color='primary'

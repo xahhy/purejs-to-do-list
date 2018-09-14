@@ -42,6 +42,7 @@ class Details extends React.Component {
     constructor(props) {
         super(props);
         this.state = {tags: [], todo: new Todo()};
+        this.defaultDate = '2018-10-01';
     }
 
     handleClose = () => {
@@ -80,7 +81,6 @@ class Details extends React.Component {
 
     render() {
         const { classes, theme, details } = this.props;
-        const {todo} = details;
         const {todo: _todo} = this.state;
         return (
             <Dialog
@@ -114,7 +114,7 @@ class Details extends React.Component {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            value={this.state.todo.dueDate ? this.state.todo.dueDate : '2018-10-01'}
+                            value={this.state.todo.dueDate ? this.state.todo.dueDate : ''}
                             onChange={(event) => this.handleChangeTodoDueDate(event)}
                             fullWidth={true}
                         />
@@ -122,7 +122,7 @@ class Details extends React.Component {
                             Status
                         </InputLabel>
                         <Select
-                            value={todo.status}
+                            value={_todo.status}
                             onChange={event => this.updateToDoStatus(event)}
                             input={<Input id="status-label-placeholder"/>}
                             fullWidth={true}
