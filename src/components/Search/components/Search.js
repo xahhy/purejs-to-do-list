@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Advanced from './Advanced';
 
 class Search extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class Search extends React.Component {
                     </Button>
                 </Grid>
                 {
-                    advanced &&  'Advanced'
+                    advanced &&  <Advanced {...this.props}/>
                 }
             </FormControl>
         );

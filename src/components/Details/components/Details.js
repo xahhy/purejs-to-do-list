@@ -98,7 +98,7 @@ class Details extends React.Component {
                     <Grid
                         container
                         direction="column"
-                        spacing={12}
+                        spacing={16}
                     >
                         <Grid item xs={12}>
                             <TextField

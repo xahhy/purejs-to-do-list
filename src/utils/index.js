@@ -10,3 +10,10 @@ export const groupBy = (list, prop) => {
 
 export const STATUS = {TODO: 'To do', IN_PROGRESS: 'In progress', BLOCKED: 'Blocked'};
 
+export const isValidDate = function (d) {
+    return d instanceof Date && !isNaN(d);
+};
+
+Date.prototype.toISODateString = function(){
+    return this.toISOString().slice(0,10);
+};

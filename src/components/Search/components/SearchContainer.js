@@ -1,13 +1,14 @@
 import Search from './Search';
 import {connect} from 'react-redux';
-import {filterByName} from '../../../actions';
+import {filterByDate, filterByName} from '../../../actions';
 
 const mapStateToProps = (state) => ({
 
 });
 
-const mapDispatchToProps = (dispatch)=>({
-    filterByName: keyWord => dispatch(filterByName(keyWord))
+const mapDispatchToProps = (dispatch, ownProps)=>({
+    filterByName: keyWord => dispatch(filterByName(keyWord)),
+    filterByDate: (startDate, endDate) => dispatch(filterByDate(startDate, endDate))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

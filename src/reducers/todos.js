@@ -1,7 +1,7 @@
 import Todo from '../data/Todo';
-import {STATUS} from '../utils';
+import {isValidDate, STATUS} from '../utils';
 
-const defaultToDos = {todos: [new Todo(0, 'name', STATUS.TODO)], visible: [0]};
+const defaultToDos = {todos: [new Todo(0, 'name', STATUS.TODO)], visible: [0], startDate: new Date(), endDate: new Date()};
 const todos = (state = defaultToDos, action) => {
     switch (action.type) {
         case 'ADD_TODO':
@@ -33,6 +33,14 @@ const todos = (state = defaultToDos, action) => {
             return {
                 ...state,
                 visible: state.todos.filter(todo=>todo.name.includes(action.keyWord)).map(todo=>todo.id)
+            };
+        case 'FILTER_BY_DATE':
+            return {
+                ...state,
+                visible: state.todos.filter(todo=>{
+                    return (isValidDate(action.startDate) ? new Date(todo.dueDate) >= action.startDate : true) &&
+                        (isValidDate(action.endDate) ? new Date(todo.dueDate) <= action.endDate : true);
+                }).map(todo=>todo.id)
             };
         default:
             break;

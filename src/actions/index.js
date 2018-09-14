@@ -47,3 +47,7 @@ export const filterByName = keyWord => ({
     type: 'FILTER_BY_NAME',
     keyWord
 });
+export const filterByDate = (startDate, endDate) => ({
+    type: 'FILTER_BY_DATE',
+    startDate, endDate
+});
