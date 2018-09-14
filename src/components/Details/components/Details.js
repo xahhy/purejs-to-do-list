@@ -37,6 +37,7 @@ const styles = theme => ({
 const tags = [
     'Meeting', 'TWU'
 ];
+
 class Details extends React.Component {
 
     constructor(props) {
@@ -46,7 +47,7 @@ class Details extends React.Component {
     }
 
     handleClose = () => {
-        this.setState({tags:[], todo:new Todo()});
+        this.setState({tags: [], todo: new Todo()});
         this.props.toggleDetail(false);
     };
 
@@ -80,7 +81,7 @@ class Details extends React.Component {
     };
 
     render() {
-        const { classes, theme, details } = this.props;
+        const {classes, theme, details} = this.props;
         const {todo: _todo} = this.state;
         return (
             <Dialog
@@ -97,73 +98,84 @@ class Details extends React.Component {
                     <Grid
                         container
                         direction="column"
-                        alignItems="flex-start"
+                        spacing={12}
                     >
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            label="Action"
-                            value={_todo.name ? _todo.name : ''}
-                            onChange={(event) => this.handleChangeTodoName(event)}
-                            InputLabelProps={{ shrink: true }}
-                            fullWidth={true}
-                        />
-                        <TextField
-                            label="Due Date"
-                            type="date"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            value={this.state.todo.dueDate ? this.state.todo.dueDate : ''}
-                            onChange={(event) => this.handleChangeTodoDueDate(event)}
-                            fullWidth={true}
-                        />
-                        <InputLabel shrink htmlFor="status-label-placeholder">
-                            Status
-                        </InputLabel>
-                        <Select
-                            value={_todo.status}
-                            onChange={event => this.updateToDoStatus(event)}
-                            input={<Input id="status-label-placeholder"/>}
-                            fullWidth={true}
-                        >
-                            <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
-                            <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
-                            <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
-                        </Select>
-                        <InputLabel shrink htmlFor="select-multiple-tags">
-                            Tags
-                        </InputLabel>
-                        <Select
-                            multiple
-                            value={this.state.tags}
-                            onChange={this.handleChangeTags}
-                            input={<Input id="select-multiple-tags"/>}
-                            renderValue={selected => (
-                                <div>
-                                    {selected.map(value => (
-                                        <Chip key={value} label={value}/>
-                                    ))}
-                                </div>
-                            )}
-                            fullWidth={true}
-                        >{
-                            tags.map(name =>
-                                <MenuItem
-                                    key={name}
-                                    value={name}
-                                    style={{
-                                        fontWeight:
-                                            this.state.tags.indexOf(name) === -1
-                                                ? theme.typography.fontWeightRegular
-                                                : theme.typography.fontWeightMedium,
-                                    }}
-                                >
-                                    {name}
-                                </MenuItem>
-                            )
-                        }
-                        </Select>
+                        <Grid item xs={12}>
+                            <TextField
+                                autoFocus
+                                id={'todoName'}
+                                margin="dense"
+                                label='Action:'
+                                value={_todo.name ? _todo.name : ''}
+                                onChange={(event) => this.handleChangeTodoName(event)}
+                                InputLabelProps={{shrink: true}}
+                                fullWidth={true}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Due Date"
+                                type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                value={this.state.todo.dueDate ? this.state.todo.dueDate : ''}
+                                onChange={(event) => this.handleChangeTodoDueDate(event)}
+                                fullWidth={true}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <InputLabel shrink htmlFor="todo-status">
+                                Status
+                            </InputLabel>
+                            <Select
+                                value={_todo.status}
+                                onChange={event => this.updateToDoStatus(event)}
+                                input={<Input id="status-label-placeholder"/>}
+                                fullWidth={true}
+                                inputProps={{
+                                    name: 'age',
+                                    id: 'todo-status',
+                                }}
+                            >
+                                <MenuItem value={store.STATUS.TODO}>{store.STATUS.TODO}</MenuItem>
+                                <MenuItem value={store.STATUS.DONE}>{store.STATUS.DONE}</MenuItem>
+                                <MenuItem value={store.STATUS.BLOCKED}>{store.STATUS.BLOCKED}</MenuItem>
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <InputLabel shrink htmlFor="select-multiple-tags">Tags</InputLabel>
+                            <Select
+                                multiple
+                                value={this.state.tags}
+                                onChange={this.handleChangeTags}
+                                input={<Input id="select-multiple-tags"/>}
+                                renderValue={selected => (
+                                    <div>
+                                        {selected.map(value => (
+                                            <Chip key={value} label={value}/>
+                                        ))}
+                                    </div>
+                                )}
+                                fullWidth={true}
+                            >{
+                                tags.map(name =>
+                                    <MenuItem
+                                        key={name}
+                                        value={name}
+                                        style={{
+                                            fontWeight:
+                                                this.state.tags.indexOf(name) === -1
+                                                    ? theme.typography.fontWeightRegular
+                                                    : theme.typography.fontWeightMedium,
+                                        }}
+                                    >
+                                        {name}
+                                    </MenuItem>
+                                )
+                            }
+                            </Select>
+                        </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions>
@@ -179,4 +191,4 @@ class Details extends React.Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(Details);
+export default withStyles(styles, {withTheme: true})(Details);

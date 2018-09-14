@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../../store/index';
 import {groupBy} from '../../../utils/index';
-import {Pie} from 'react-chartjs';
+import {Pie} from 'react-chartjs-2';
 
 class BarChart extends React.Component {
 
@@ -53,8 +53,28 @@ class BarChart extends React.Component {
                 fontSize: 20,
             }
         };
+        const data = {
+            labels: [
+                'TODO',
+                'DONE',
+                'BLOCKED'
+            ],
+            datasets: [{
+                data: [TODONumber, DONENumber, BLOCKEDNumber],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ]
+            }]
+        };
         return (
-            <Pie data={chartData} options={chartOptions}/>
+            <Pie data={data} width="600" height="250"/>
         );
     }
 }
