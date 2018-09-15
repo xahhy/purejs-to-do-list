@@ -22,26 +22,30 @@ class Search extends React.Component {
         const {advanced, keyWord} = this.state;
         return (
             <FormControl>
-                <Grid container>
-                    <Input
-                        placeholder={'Search Words'}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <IconButton>
-                                    <SearchIcon/>
-                                </IconButton>
-                            </InputAdornment>
+                <Grid container direction='column'>
+                    <Grid item>
+                        <Input
+                            placeholder={'Search Words'}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <IconButton>
+                                        <SearchIcon/>
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            onChange={event => this.handleChangeSearch(event)}
+                            value={keyWord}
+                        />
+                        <Button color="primary" onClick={this.handleChangeAdvanced}>
+                            Advanced
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        {
+                            advanced && <Advanced {...this.props}/>
                         }
-                        onChange={event => this.handleChangeSearch(event)}
-                        value={keyWord}
-                    />
-                    <Button color="primary" onClick={this.handleChangeAdvanced}>
-                        Advanced
-                    </Button>
+                    </Grid>
                 </Grid>
-                {
-                    advanced &&  <Advanced {...this.props}/>
-                }
             </FormControl>
         );
     }

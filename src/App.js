@@ -20,7 +20,7 @@ function TabContainer({children, dir}) {
 
 const styles = {
     container: {
-        maxWidth: 1000
+        // maxWidth: 1000
     }
 };
 
@@ -37,10 +37,10 @@ class App extends Component {
     render() {
         const {tab} = this.state;
         return (
-            <Grid container justify='center' direction={'column'} alignItems={'center'}>
+            <Grid container justify='center' direction={'column'} alignItems={'center'} style={styles.container}>
                 <Tabs value={this.state.tab} onChange={this.handleChangeTabs}>
-                    <Tab label="To dos" component={Link} to={'/'}/>
-                    <Tab label="Statistic" component={Link} to={'/statistic'}/>
+                    <Tab label="To dos"/>
+                    <Tab label="Statistic"/>
                 </Tabs>
                 <Search/>
                 {
