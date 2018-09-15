@@ -15,5 +15,5 @@ export const isValidDate = function (d) {
 };
 
 Date.prototype.toISODateString = function(){
-    return this.toISOString().slice(0,10);
+    return isNaN(this) ? '' : this.toISOString().slice(0,10);
 };

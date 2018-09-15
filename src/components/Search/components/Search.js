@@ -29,8 +29,9 @@ class Search extends React.Component {
         return (
             <FormControl>
                 <Grid container direction='column'>
-                    <Grid item>
-                        <Input
+                    <Grid item container direction='row'>
+                        <Grid item>
+                            <Input
                             id='searchWord'
                             placeholder='Search Word'
                             startAdornment={
@@ -43,9 +44,12 @@ class Search extends React.Component {
                             onChange={this.handleChangeSearch}
                             value={keyWord}
                         />
-                        <Button color="primary" onClick={this.handleChangeAdvanced}>
-                            Advanced
-                        </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button color="primary" onClick={this.handleChangeAdvanced}>
+                                Advanced
+                            </Button>
+                        </Grid>
                     </Grid>
                     <Grid item>
                         {
