@@ -15,7 +15,6 @@ class BarChart extends React.Component {
     };
 
     render() {
-        console.log(this.props.todos);
         const {TODONumber, DONENumber, BLOCKEDNumber} = this.getBarChartData(groupBy(this.props.todos, 'status'));
         const chartOptions = {
             maintainAspectRatio: false,

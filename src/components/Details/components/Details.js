@@ -1,19 +1,19 @@
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField/TextField';
-import DialogContent from '@material-ui/core/DialogContent/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import Button from '@material-ui/core/Button/Button';
-import Grid from '@material-ui/core/Grid/Grid';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import Select from '@material-ui/core/Select/Select';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Todo from '../../../data/Todo';
-import Chip from '@material-ui/core/Chip/Chip';
-import Input from '@material-ui/core/Input/Input';
+import Chip from '@material-ui/core/Chip';
+import Input from '@material-ui/core/Input';
 import {withStyles} from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel/InputLabel';
+import InputLabel from '@material-ui/core/InputLabel';
 import {STATUS} from '../../../utils';
 
 const styles = theme => ({
@@ -40,7 +40,6 @@ class Details extends React.Component {
     constructor(props) {
         super(props);
         this.state = {tags: [], todo: new Todo()};
-        this.defaultDate = '2018-10-01';
     }
 
     handleClose = () => {
@@ -53,7 +52,7 @@ class Details extends React.Component {
         this.props.toggleDetail(false);
     };
 
-    updateToDoStatus = (event) => {
+    handleChangeToDoStatus = (event) => {
         this.state.todo.status = event.target.value;
         this.setState({todo: this.state.todo});
     };
@@ -68,7 +67,7 @@ class Details extends React.Component {
         this.setState({todo: this.state.todo});
     };
 
-    handleChangeTags = (event) => {
+    handleChangeTodoTags = (event) => {
         this.state.todo.tags = event.target.value;
         this.setState({todo: this.state.todo, tags: event.target.value});
     };
@@ -100,7 +99,7 @@ class Details extends React.Component {
                         <Grid item xs={12}>
                             <TextField
                                 autoFocus
-                                id={'todoName'}
+                                id='todoName'
                                 margin="dense"
                                 label='Action:'
                                 value={_todo.name ? _todo.name : ''}
@@ -111,6 +110,7 @@ class Details extends React.Component {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                id='todoDueDate'
                                 label="Due Date"
                                 type="date"
                                 InputLabelProps={{
@@ -126,8 +126,9 @@ class Details extends React.Component {
                                 Status
                             </InputLabel>
                             <Select
+                                id='todoStatus'
                                 value={_todo.status}
-                                onChange={event => this.updateToDoStatus(event)}
+                                onChange={this.handleChangeToDoStatus}
                                 input={<Input id="status-label-placeholder"/>}
                                 fullWidth={true}
                                 inputProps={{
@@ -144,8 +145,9 @@ class Details extends React.Component {
                             <InputLabel shrink htmlFor="select-multiple-tags">Tags</InputLabel>
                             <Select
                                 multiple
+                                id='todoTags'
                                 value={this.state.tags}
-                                onChange={this.handleChangeTags}
+                                onChange={this.handleChangeTodoTags}
                                 input={<Input id="select-multiple-tags"/>}
                                 renderValue={selected => (
                                     <div>

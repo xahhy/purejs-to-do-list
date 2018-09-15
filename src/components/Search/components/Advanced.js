@@ -30,6 +30,7 @@ class Advanced extends React.Component {
                 <Grid item container direction='row' spacing={16} xs={12}>
                     <Grid item xs={6}>
                         <TextField
+                            id='searchStartDate'
                             label="Due Date Start"
                             type="date"
                             InputLabelProps={{
@@ -42,6 +43,7 @@ class Advanced extends React.Component {
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
+                            id='searchEndDate'
                             label="Due Date End"
                             type="date"
                             InputLabelProps={{

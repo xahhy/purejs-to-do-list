@@ -18,6 +18,11 @@ class Search extends React.Component {
         this.setState({advanced: !this.state.advanced})
     };
 
+    handleChangeSearch = (event) => {
+        this.setState({keyWord: event.target.value});
+        this.props.filterByName(event.target.value);
+    };
+
     render() {
         const {advanced, keyWord} = this.state;
         return (
@@ -25,7 +30,8 @@ class Search extends React.Component {
                 <Grid container direction='column'>
                     <Grid item>
                         <Input
-                            placeholder={'Search Words'}
+                            id='searchWord'
+                            placeholder='Search Word'
                             startAdornment={
                                 <InputAdornment position="start">
                                     <IconButton>
@@ -33,7 +39,7 @@ class Search extends React.Component {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            onChange={event => this.handleChangeSearch(event)}
+                            onChange={this.handleChangeSearch}
                             value={keyWord}
                         />
                         <Button color="primary" onClick={this.handleChangeAdvanced}>
@@ -49,11 +55,6 @@ class Search extends React.Component {
             </FormControl>
         );
     }
-
-    handleChangeSearch = (event) => {
-        this.setState({keyWord: event.target.value});
-        this.props.filterByName(event.target.value);
-    };
 }
 
 export default Search;
