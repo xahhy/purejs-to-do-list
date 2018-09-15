@@ -15,7 +15,8 @@ class Search extends React.Component {
     }
 
     handleChangeAdvanced = () => {
-        this.setState({advanced: !this.state.advanced})
+        this.setState({advanced: !this.state.advanced});
+        this.state.advanced && this.props.filterClearAdvanced()
     };
 
     handleChangeSearch = (event) => {

@@ -55,3 +55,6 @@ export const filterByTags = (tags=[]) => ({
     type: 'FILTER_BY_TAGS',
     tags
 });
+export const filterClearAdvanced = ()=>({
+    type: 'FILTER_CLEAR_ADVANCED'
+});

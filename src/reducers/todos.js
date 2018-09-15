@@ -93,6 +93,15 @@ const todos = (state = defaultToDos, action) => {
                 visible: filterCombine(state.todos, filter).map(todo => todo.id),
                 filter
             };
+        case 'FILTER_CLEAR_ADVANCED':
+            filter = {
+                ...defaultToDos, keyWord: state.filter.keyWord
+            };
+            return {
+                ...state,
+                visible: filterCombine(state.todos, filter).map(todo => todo.id),
+                filter
+            };
         default:
             break;
     }
