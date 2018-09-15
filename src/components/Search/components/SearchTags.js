@@ -15,8 +15,8 @@ const styles = theme => ({
     },
     formControl: {
         margin: theme.spacing.unit,
-        minWidth: 120,
-        maxWidth: 300,
+        // minWidth: 120,
+        // maxWidth: 300,
     },
     chips: {
         display: 'flex',
@@ -31,27 +31,31 @@ class SearchTags extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {_tags: []}
+        this.state = {tags: []}
     }
 
     handleChangeTags = (event) => {
-        this.setState({_tags: event.target.value});
+        this.setState({tags: event.target.value});
     };
+
+    componentDidUpdate(){
+        this.props.filterByTags(this.state.tags);
+    }
 
     render() {
         const {tags, theme} = this.props;
         return (
-            <FormControl fullWidth={true}>
+            <FormControl fullWidth={true} className={theme.formControl}>
                 <InputLabel shrink htmlFor="select-multiple-tags-for-search">Tags</InputLabel>
                 <Select
                     multiple
-                    value={this.state._tags}
+                    value={this.state.tags}
                     onChange={(event)=>this.handleChangeTags(event)}
                     input={<Input id="select-multiple-tags-for-search"/>}
                     renderValue={selected => (
                         <div>
                             {selected.map(value => (
-                                <Chip key={value} label={value}/>
+                                <Chip key={value} label={value} className={theme.chip}/>
                             ))}
                         </div>
                     )}
@@ -63,7 +67,7 @@ class SearchTags extends React.Component{
                             value={name}
                             style={{
                                 fontWeight:
-                                    this.state._tags.indexOf(name) === -1
+                                    this.state.tags.indexOf(name) === -1
                                         ? theme.typography.fontWeightRegular
                                         : theme.typography.fontWeightMedium,
                             }}

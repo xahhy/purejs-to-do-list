@@ -20,7 +20,7 @@ class Advanced extends React.Component {
     };
 
     componentDidUpdate() {
-        // this.props.filterByDate(this.state.startDate, this.state.endDate)
+        this.props.filterByDate(this.state.startDate, this.state.endDate);
     }
 
     render() {
@@ -54,7 +54,7 @@ class Advanced extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <SearchTags tags={tags}/>
+                    <SearchTags tags={tags} filterByTags={this.props.filterByTags}/>
                 </Grid>
             </Grid>
         );
