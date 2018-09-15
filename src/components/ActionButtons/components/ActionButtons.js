@@ -9,7 +9,7 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     container: {
-        maxWidth: 1000
+        // maxWidth: 1000
     }
 });
 class ActionButtons extends React.Component {

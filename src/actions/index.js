@@ -51,3 +51,7 @@ export const filterByDate = (startDate, endDate) => ({
     type: 'FILTER_BY_DATE',
     startDate, endDate
 });
+export const filterByTags = (tags=[]) => ({
+    type: 'FILTER_BY_TAGS',
+    tags
+});

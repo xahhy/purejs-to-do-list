@@ -34,9 +34,6 @@ const styles = theme => ({
         margin: theme.spacing.unit / 4,
     },
 });
-const tags = [
-    'Meeting', 'TWU'
-];
 
 class Details extends React.Component {
 
@@ -81,7 +78,7 @@ class Details extends React.Component {
     };
 
     render() {
-        const {classes, theme, details} = this.props;
+        const {classes, theme, details, tags} = this.props;
         const {todo: _todo} = this.state;
         return (
             <Dialog

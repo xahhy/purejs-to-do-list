@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {filterByDate, filterByName} from '../../../actions';
 
 const mapStateToProps = (state) => ({
-
+    tags: state.tags
 });
 
 const mapDispatchToProps = (dispatch, ownProps)=>({

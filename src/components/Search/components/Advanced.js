@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import '../../../utils';
 import {isValidDate} from '../../../utils';
 import Grid from '@material-ui/core/Grid';
+import SearchTags from './SearchTags'
 
 class Advanced extends React.Component {
     constructor(props) {
@@ -19,14 +20,15 @@ class Advanced extends React.Component {
     };
 
     componentDidUpdate() {
-        this.props.filterByDate(this.state.startDate, this.state.endDate)
+        // this.props.filterByDate(this.state.startDate, this.state.endDate)
     }
 
     render() {
+        const { theme, tags} = this.props;
         return (
             <Grid container>
-                <Grid item container direction='row' spacing={16}>
-                    <Grid item>
+                <Grid item container direction='row' spacing={16} xs={12}>
+                    <Grid item xs={6}>
                         <TextField
                             label="Due Date Start"
                             type="date"
@@ -38,7 +40,7 @@ class Advanced extends React.Component {
                             fullWidth={true}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6}>
                         <TextField
                             label="Due Date End"
                             type="date"
@@ -51,12 +53,13 @@ class Advanced extends React.Component {
                         />
                     </Grid>
                 </Grid>
-                <Grid item>
-                    Tags
+                <Grid item xs={12}>
+                    <SearchTags tags={tags}/>
                 </Grid>
             </Grid>
         );
     }
 }
 
+// export default withStyles(styles, {withTheme: true})(Advanced);
 export default Advanced;

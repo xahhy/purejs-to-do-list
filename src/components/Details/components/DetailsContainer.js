@@ -4,6 +4,7 @@ import {addSelectedTodo, deleteSelectedTodo, deleteTodos, toggleDetail, updateTo
 
 const mapStateToProps = (state, ownProps) => ({
     details: state.details,
+    tags: state.tags
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
