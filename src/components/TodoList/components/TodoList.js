@@ -1,15 +1,9 @@
-import {updateTodo} from '../../../actions/index';
 import React from 'react';
-import store from '../../../store/index';
 import Table from '@material-ui/core/Table/Table';
 import TableBody from '@material-ui/core/TableBody/TableBody';
 import TableRow from '@material-ui/core/TableRow/TableRow';
 import TableCell from '@material-ui/core/TableCell/TableCell';
 import {withStyles} from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import TextField from '@material-ui/core/TextField/TextField';
-import Select from '@material-ui/core/Select/Select';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
@@ -30,17 +24,7 @@ class TodoList extends React.Component {
         super(props);
     }
 
-    updateToDoName = (event, item) => {
-        item.name = event.target.value;
-        this.props.updateTodo(item)
-    };
-
-    updateToDoStatus = (event, item) => {
-        item.status = event.target.value;
-        this.props.updateTodo(item)
-    };
-
-    deleteTodo = (id) => {
+    handleDeleteTodo = (id) => {
         this.props.deleteTodos([id])
     };
 
@@ -86,17 +70,13 @@ class TodoList extends React.Component {
                                     Details
                                 </Button>
                                 <Button variant='contained' color='secondary'
-                                        onClick={() => this.deleteTodo(item.id)}>Delete</Button>
+                                        onClick={() => this.handleDeleteTodo(item.id)}>Delete</Button>
                             </TableCell>
                         </TableRow>
                     )}
                 </TableBody>
             </Table>
         )
-    }
-
-    componentDidMount() {
-        // document.querySelectorAll('.item').forEach(input => input.addEventListener('focusout', this.updateToDoList.bind(this)))
     }
 }
 

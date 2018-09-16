@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ActionButtons from './components/ActionButtons';
-import ToDoList from './components/ToDoList';
+import ToDoList from './components/TodoList';
 import BarChart from './components/BarChart';
 import Grid from '@material-ui/core/Grid/Grid';
 import Details from './components/Details'

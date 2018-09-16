@@ -52,7 +52,9 @@ class BarChart extends React.Component {
             }]
         };
         return (
-            <Pie data={data} width={500} height={250} options={chartOptions}/>
+            <div>
+                <Pie data={data} width={500} height={250} options={chartOptions}/>
+            </div>
         );
     }
 }
