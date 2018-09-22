@@ -1,7 +1,6 @@
 const defaultLoginState = {
     isLogin: false,
-    userName: '',
-    userId: '',
+    username: '',
     token: ''
 };
 const login = (state = defaultLoginState, action) => {

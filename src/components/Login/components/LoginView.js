@@ -6,6 +6,7 @@ import {
 
 import Login from '../../../data/Login';
 import {Redirect} from 'react-router-dom';
+import {loginUseJWT} from '../../../api';
 
 const styles = {
     card: {
@@ -15,10 +16,7 @@ const styles = {
 
 class LoginView extends React.Component {
     handleLogin = () => {
-        const login = new Login(this.userNameRef.value);
-        login.isLogin = true;
-        debugger;
-        this.props.loginWith(login);
+        loginUseJWT(this.usernameRef.value, this.passwordRef.value, this.props.loginWith);
     };
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/logout'}};
@@ -29,11 +27,11 @@ class LoginView extends React.Component {
             <Card style={styles.card}>
                 <CardContent>
                     <TextField
-                        id='userName'
+                        id='username'
                         label='username'
                         placeholder='Please enter username here'
                         fullWidth={true}
-                        inputRef={ref=>this.userNameRef = ref}
+                        inputRef={ref=>this.usernameRef = ref}
                     />
                     <TextField
                         id='password'

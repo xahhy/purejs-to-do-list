@@ -62,7 +62,6 @@ class AppContainer extends Component {
 
 let LoginRequiredRouter = (props => {
     const {component: Component, login, ...rest} = props;
-    debugger;
     return (
         <Route {...rest} render={props => (
             login.isLogin ? <Component {...rest}/> :
