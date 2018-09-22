@@ -7,8 +7,10 @@ import Details from './components/Details'
 import Search from './components/Search'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {Route, Switch, Link, Router} from 'react-router-dom';
+import {Route, Switch, Link, Router, Redirect} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import {connect} from 'react-redux';
+import Login from './components/Login';
 
 function TabContainer({children, dir}) {
     return (
@@ -24,7 +26,7 @@ const styles = {
     }
 };
 
-class App extends Component {
+class AppContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {tab: 0}
@@ -56,7 +58,37 @@ class App extends Component {
             </Grid>
         )
     }
+}
 
+let LoginRequiredRouter = (props => {
+    const {component: Component, login, ...rest} = props;
+    debugger;
+    return (
+        <Route {...rest} render={props => (
+            login.isLogin ? <Component {...rest}/> :
+                <Redirect to={{
+                    pathname: '/login',
+                    state: {from: props.location}
+                }}/>
+        )}>
+        </Route>
+    )
+});
+LoginRequiredRouter = connect(({login}) => ({login}))(LoginRequiredRouter);
+
+class App extends React.Component {
+    render() {
+        return (
+            <Grid container justify='center' direction={'column'} alignItems={'center'} style={styles.container}>
+                <Grid item>
+                    <Switch>
+                        <LoginRequiredRouter path='/' exact component={AppContainer}/>
+                        <Route path='/login' exact component={Login}/>
+                    </Switch>
+                </Grid>
+            </Grid>
+        );
+    }
 }
 
 export default App;
