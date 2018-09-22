@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
 import {fetchAllTodos} from '../../../api'
+import Tooltip from '@material-ui/core/Tooltip';
+import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 
 const styles = theme => ({
     table: {
@@ -19,6 +21,14 @@ const styles = theme => ({
         },
     },
 });
+
+const rows = [
+    {id: 'name', enableSort: true, disablePadding: true, label: 'Action'},
+    {id: 'tags', enableSort: false, disablePadding: true, label: 'Tags'},
+    {id: 'dueDate', enableSort: false, disablePadding: true, label: 'DueDate'},
+    {id: 'status', enableSort: false, disablePadding: true, label: 'Status'},
+    {id: 'actions', enableSort: false, disablePadding: true, label: 'Actions'}
+];
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -35,17 +45,34 @@ class TodoList extends React.Component {
         this.props.toggleDetail(true);
     };
 
+    createSortHandler = id => {
+        console.log(id);
+    };
     render() {
         const {classes} = this.props;
+        const {order, orderBy} = this.props.filter;
+        debugger;
         return (
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Action</TableCell>
-                        <TableCell>Tags</TableCell>
-                        <TableCell>Due Date</TableCell>
-                        <TableCell>Status</TableCell>
-                        <TableCell>Actions</TableCell>
+                        {
+                            rows.map(row => {
+                                return (
+                                    <TableCell key={row.id} padding={row.disablePadding ? 'none' : 'default'}>
+                                        <Tooltip title='Sort' enterDelay={300}>
+                                            <TableSortLabel
+                                                active={orderBy === row.id}
+                                                direction={order}
+                                                onClick={this.createSortHandler(row.id)}
+                                            >
+                                                {row.label}
+                                            </TableSortLabel>
+                                        </Tooltip>
+                                    </TableCell>
+                                )
+                            })
+                        }
                     </TableRow>
                 </TableHead>
                 <TableBody>

@@ -1,6 +1,6 @@
-export const fetchAllTodos = (callBack)=>{
-    return fetch('/todos',{
-        method: "GET",
+export const fetchAllTodos = (callBack) => {
+    return fetch('/todos', {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
@@ -13,5 +13,5 @@ export const fetchAllTodos = (callBack)=>{
             console.log(response);
             callBack(response.content)
         }
-    );
+    ).catch(reason => console.log(reason))
 };

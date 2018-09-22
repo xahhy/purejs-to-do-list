@@ -8,7 +8,9 @@ const defaultToDos = {
         startDate: null,
         endDate: null,
         keyWord: '',
-        tags: []
+        tags: [],
+        order: 'desc',
+        orderBy: 'name'
     }
 };
 

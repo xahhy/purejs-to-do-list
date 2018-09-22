@@ -3,7 +3,7 @@ import TodoList from './TodoList';
 
 export default (props)=>{
     const {todos, ...rest} = props;
-    debugger;
     const _todos = todos.todos.filter(todo=>todos.visible.includes(todo.id));
-    return <TodoList todos={_todos} {...rest}/>
+    const _filter = todos.filter;
+    return <TodoList todos={_todos} filter={_filter} {...rest}/>
 }
