@@ -45,13 +45,13 @@ class TodoList extends React.Component {
         this.props.toggleDetail(true);
     };
 
-    createSortHandler = id => {
-        console.log(id);
+    createSortHandler = (property) => {
+        console.log(property);
+        this.props.updateSortRule(property)
     };
     render() {
         const {classes} = this.props;
         const {order, orderBy} = this.props.filter;
-        debugger;
         return (
             <Table className={classes.table}>
                 <TableHead>
@@ -62,9 +62,9 @@ class TodoList extends React.Component {
                                     <TableCell key={row.id} padding={row.disablePadding ? 'none' : 'default'}>
                                         <Tooltip title='Sort' enterDelay={300}>
                                             <TableSortLabel
-                                                active={orderBy === row.id}
+                                                active={orderBy === row.id && row.enableSort}
                                                 direction={order}
-                                                onClick={this.createSortHandler(row.id)}
+                                                onClick={()=>this.createSortHandler(row.id)}
                                             >
                                                 {row.label}
                                             </TableSortLabel>

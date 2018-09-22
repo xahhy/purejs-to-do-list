@@ -110,6 +110,16 @@ const todos = (state = defaultToDos, action) => {
                 visible: filterCombine(state.todos, filter).map(todo => todo.id),
                 filter
             };
+        case 'UPDATE_SORT_RULE':
+            const orderBy = action.property;
+            let order = 'desc';
+            if (state.filter.orderBy === action.property && state.filter.order === 'desc') {
+                order = 'asc';
+            }
+            return {
+                ...state,
+                filter: {...state.filter, orderBy, order}
+            };
         default:
             break;
     }

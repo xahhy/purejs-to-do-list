@@ -63,3 +63,8 @@ export const filterByTags = (tags=[]) => ({
 export const filterClearAdvanced = ()=>({
     type: 'FILTER_CLEAR_ADVANCED'
 });
+
+export const updateSortRule = (property) => ({
+    type: 'UPDATE_SORT_RULE',
+    property
+});
