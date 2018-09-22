@@ -73,7 +73,9 @@ class Details extends React.Component {
     };
 
     handleOnEnter = () => {
-        this.setState({todo: {...this.props.details.todo}, tags: [...this.props.details.todo.tags]});
+        const {details} = this.props;
+        debugger;
+        this.setState({todo: {...details.todo}, tags: details.todo.tags ? [...details.todo.tags] : []});
     };
 
     render() {

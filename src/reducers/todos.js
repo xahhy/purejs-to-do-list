@@ -60,6 +60,12 @@ const todos = (state = defaultToDos, action) => {
                     } else return todo;
                 })
             };
+        case 'UPDATE_TODOS':
+            return {
+                ...state,
+                todos: action.todos,
+                visible: action.todos.map(todo=>todo.id)
+            };
         case 'DELETE_TODOS':
             return {
                 ...state,

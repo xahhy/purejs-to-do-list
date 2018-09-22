@@ -13,6 +13,11 @@ export const updateTodo = (todo) => ({
     todo
 });
 
+export const updateTodos = todos => ({
+    type: 'UPDATE_TODOS',
+    todos
+});
+
 export const addSelectedTodo = id => ({
     type: 'ADD_SELECTED_TODO',
     id

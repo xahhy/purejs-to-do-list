@@ -7,6 +7,7 @@ import {withStyles} from '@material-ui/core/styles';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
+import {fetchAllTodos} from '../../../api'
 
 const styles = theme => ({
     table: {
@@ -22,6 +23,7 @@ const styles = theme => ({
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
+        fetchAllTodos(props.updateTodos);
     }
 
     handleDeleteTodo = (id) => {
@@ -53,7 +55,7 @@ class TodoList extends React.Component {
                                 {item.name}
                             </TableCell>
                             <TableCell>
-                                {item.tags.map(value => (
+                                {item.tags && item.tags.map(value => (
                                     <Chip key={value} label={value}/>
                                 ))}
                             </TableCell>

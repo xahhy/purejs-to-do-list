@@ -7,7 +7,7 @@ import {
     deleteTodos,
     toggleDetail,
     updateTodo,
-    setCurrentTodoForDetail
+    setCurrentTodoForDetail, updateTodos
 } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     deleteSelectedTodo: id => dispatch(deleteSelectedTodo(id)),
     deleteTodos: todos => dispatch(deleteTodos(todos)),
     toggleDetail: show => dispatch(toggleDetail(show)),
-    setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo))
+    setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo)),
+    updateTodos: (todos) => dispatch(updateTodos(todos))
 });
 
 export default connect(

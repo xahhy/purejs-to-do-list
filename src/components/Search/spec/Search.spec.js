@@ -8,7 +8,8 @@ import Advanced from '../components/Advanced';
 describe('Search', function () {
     let component;
     let mockProps = {
-        filterByName: jest.fn()
+        filterByName: jest.fn(),
+        filterClearAdvanced: jest.fn()
     };
 
     beforeAll(() => {
