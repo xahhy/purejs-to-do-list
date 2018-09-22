@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import {groupBy, STATUS} from '../utils';
+import login from '../reducers/login';
 
 export const addTodo = name => ({
     type: 'ADD_TODO',
@@ -67,4 +68,9 @@ export const filterClearAdvanced = ()=>({
 export const updateSortRule = (property) => ({
     type: 'UPDATE_SORT_RULE',
     property
+});
+
+export const loginWith = (login) => ({
+    type: 'LOGIN_USER',
+    ...login
 });

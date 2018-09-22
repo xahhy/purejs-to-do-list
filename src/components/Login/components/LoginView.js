@@ -4,14 +4,27 @@ import {
     TextField,CardContent,CardActions,Button
 } from '@material-ui/core';
 
+import Login from '../../../data/Login';
+import {Redirect} from 'react-router-dom';
+
 const styles = {
     card: {
         maxWidth: 345
     }
 };
 
-class Login extends React.Component {
+class LoginView extends React.Component {
+    handleLogin = () => {
+        const login = new Login(this.userNameRef.value);
+        login.isLogin = true;
+        debugger;
+        this.props.loginWith(login);
+    };
     render() {
+        const {from} = this.props.location.state || {from: {pathname: '/logout'}};
+        if (this.props.login.isLogin && from.pathname !== '/logout') {
+            return <Redirect to={from}/>
+        }
         return (
             <Card style={styles.card}>
                 <CardContent>
@@ -20,17 +33,19 @@ class Login extends React.Component {
                         label='username'
                         placeholder='Please enter username here'
                         fullWidth={true}
+                        inputRef={ref=>this.userNameRef = ref}
                     />
                     <TextField
                         id='password'
                         type='password'
                         label='password'
                         fullWidth={true}
+                        inputRef={ref=>this.passwordRef = ref}
                     />
                 </CardContent>
                 <CardActions style={{justifyContent: 'flex-end'}}>
                     <Button>Cancel</Button>
-                    <Button variant='contained' color='primary'>
+                    <Button variant='contained' color='primary' onClick={this.handleLogin}>
                         Ok
                     </Button>
                 </CardActions>
@@ -39,4 +54,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default LoginView;

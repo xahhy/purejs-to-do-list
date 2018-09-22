@@ -9,10 +9,7 @@ const login = (state = defaultLoginState, action) => {
         case 'LOGIN_USER':
             return {
                 ...state,
-                isLogin: true,
-                userName: action.userName,
-                userId: action.userId,
-                token: action.token
+                ...action
             }
     }
     return state;
