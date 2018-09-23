@@ -52,7 +52,7 @@ class TodoList extends React.Component {
         this.props.updateSortRule(property)
     };
     render() {
-        const {classes} = this.props;
+        const {classes, tags} = this.props;
         const {order, orderBy} = this.props.filter;
         return (
             <Table className={classes.table}>
@@ -84,8 +84,8 @@ class TodoList extends React.Component {
                                 {item.name}
                             </TableCell>
                             <TableCell>
-                                {item.tags && item.tags.map(value => (
-                                    <Chip key={value} label={value}/>
+                                {item.tags && item.tags.map(tagId => tags.find(tag=>tag.id === tagId)).map(tag => (
+                                    <Chip key={tag.id} label={tag.name}/>
                                 ))}
                             </TableCell>
                             <TableCell>

@@ -1,5 +1,11 @@
 const defaultTags = [
-    'Meeting', 'TWU'
+    {
+        id: 0,
+        name: 'Meeting'
+    }, {
+        id: 1,
+        name: 'TWU'
+    }
 ];
 const tags = (state=defaultTags, action) => {
     switch (action.type) {
