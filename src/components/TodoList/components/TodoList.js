@@ -7,7 +7,7 @@ import {withStyles} from '@material-ui/core/styles';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
-import {fetchAllTodos} from '../../../api'
+import {fetchAllTodos, deleteTodo} from '../../../api'
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 
@@ -37,7 +37,9 @@ class TodoList extends React.Component {
     }
 
     handleDeleteTodo = (id) => {
-        this.props.deleteTodos([id])
+        // this.props.deleteTodos([id])
+        let updateTodos = this.props.updateTodos;
+        deleteTodo(id).then(response=>fetchAllTodos(updateTodos));
     };
 
     handleClickDetail = (todo) => {

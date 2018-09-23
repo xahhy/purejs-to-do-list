@@ -19,7 +19,7 @@ class LoginView extends React.Component {
         loginUseJWT(this.usernameRef.value, this.passwordRef.value, this.props.loginWith);
     };
     render() {
-        const {from} = this.props.location.state || {from: {pathname: '/logout'}};
+        const {from} = this.props.location.state || {from: {pathname: '/'}};
         if (this.props.login.isLogin && from.pathname !== '/logout') {
             return <Redirect to={from}/>
         }
