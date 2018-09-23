@@ -74,3 +74,9 @@ export const loginWith = (login) => ({
     type: 'LOGIN_USER',
     ...login
 });
+
+/* Set tags */
+export const updateAllTags = (tags) => ({
+    type: 'UPDATE_TAGS',
+    tags
+});

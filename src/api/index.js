@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import Login from '../data/Login';
 
+/* Util functions*/
 const headers = () => {
     return {
         'Content-Type': 'application/json',
@@ -18,6 +19,7 @@ const responseDispatcher = response => {
     }
 };
 
+/* Todo's API */
 export const fetchAllTodosAPI = (callback) => {
     const token = Cookies.get('token');
     return fetch('/todos', {
@@ -77,4 +79,15 @@ export const updateTodoAPI = todo => {
         headers: headers(),
         body: JSON.stringify(todo)
     }).then(responseDispatcher).catch(reason => alert(reason))
+};
+
+/* Tags API */
+export const fetchAllTagsAPI = (callback) => {
+    return fetch('/tags', {
+        method: 'GET',
+        headers: headers()
+    }).then(responseDispatcher).then(response => response.json())
+        .then(response => {
+            return callback(response);
+        }).catch(reason => alert(reason));
 };

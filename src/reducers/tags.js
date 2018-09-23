@@ -10,7 +10,9 @@ const defaultTags = [
 const tags = (state=defaultTags, action) => {
     switch (action.type) {
         case 'ADD_TAG':
-            return [...state, action.tag]
+            return [...state, action.tag];
+        case 'UPDATE_TAGS':
+            return [...action.tags];
     }
     return state;
 };

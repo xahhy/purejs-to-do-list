@@ -7,9 +7,10 @@ import {withStyles} from '@material-ui/core/styles';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
-import {fetchAllTodosAPI, deleteTodoAPI} from '../../../api'
+import {fetchAllTodosAPI, deleteTodoAPI, fetchAllTagsAPI} from '../../../api'
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
+import {updateAllTags} from '../../../actions';
 
 const styles = theme => ({
     table: {
@@ -34,6 +35,7 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         fetchAllTodosAPI(props.updateTodos);
+        fetchAllTagsAPI(props.updateAllTags);
     }
 
     handleDeleteTodo = (id) => {

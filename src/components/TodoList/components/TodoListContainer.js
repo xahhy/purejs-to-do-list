@@ -7,7 +7,7 @@ import {
     deleteTodos,
     toggleDetail,
     updateTodo,
-    setCurrentTodoForDetail, updateTodos, updateSortRule
+    setCurrentTodoForDetail, updateTodos, updateSortRule, updateAllTags
 } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,7 +23,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     toggleDetail: show => dispatch(toggleDetail(show)),
     setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo)),
     updateTodos: (todos) => dispatch(updateTodos(todos)),
-    updateSortRule: (property) => dispatch(updateSortRule(property))
+    updateSortRule: (property) => dispatch(updateSortRule(property)),
+    updateAllTags: (tags) => dispatch(updateAllTags(tags))
 });
 
 export default connect(
