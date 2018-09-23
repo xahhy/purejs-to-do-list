@@ -68,5 +68,13 @@ export const addTodoAPI = todo => {
         method: 'POST',
         headers: headers(),
         body: JSON.stringify(todo)
-    }).catch(reason => alert(reason));
+    }).then(responseDispatcher).catch(reason => alert(reason));
+};
+
+export const updateTodoAPI = todo => {
+    return fetch(`/todos/${todo.id}`, {
+        method: 'PUT',
+        headers: headers(),
+        body: JSON.stringify(todo)
+    }).then(responseDispatcher).catch(reason => alert(reason))
 };
