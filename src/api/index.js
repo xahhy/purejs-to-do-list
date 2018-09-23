@@ -8,12 +8,22 @@ const headers = () => {
     }
 };
 
-export const fetchAllTodos = (callback) => {
+const responseDispatcher = response => {
+    if (response.status >= 200 && response.status < 300) {
+        return Promise.resolve(response);
+    } else {
+        let error = new Error(response.statusText || response.status);
+        error.response = response;
+        return Promise.reject(error)
+    }
+};
+
+export const fetchAllTodosAPI = (callback) => {
     const token = Cookies.get('token');
     return fetch('/todos', {
         method: 'GET',
         headers: headers()
-    }).then(
+    }).then(responseDispatcher).then(
         response => {
             return response.json();
         }
@@ -25,7 +35,7 @@ export const fetchAllTodos = (callback) => {
     ).catch(reason => console.log(reason))
 };
 
-export const loginUseJWT = (username, password, callback) => {
+export const loginUseJWTAPI = (username, password, callback) => {
     return fetch('/login', {
         method: 'POST',
         headers: {
@@ -35,15 +45,7 @@ export const loginUseJWT = (username, password, callback) => {
             name: username,
             password
         })
-    }).then(response => {
-        if (response.status >= 200 && response.status < 300) {
-            return Promise.resolve(response);
-        } else {
-            let error = new Error(response.statusText || response.status);
-            error.response = response;
-            return Promise.reject(error)
-        }
-    }).then(response => response.text())
+    }).then(responseDispatcher).then(response => response.text())
         .then(response => {
             Cookies.set('token', response);
             const login = new Login(username);
@@ -53,17 +55,18 @@ export const loginUseJWT = (username, password, callback) => {
         }).catch(reason => alert(reason))
 };
 
-export const deleteTodo = (id) => {
+export const deleteTodoAPI = (id) => {
     return fetch(`/todos/${id}`, {
         method: 'DELETE',
         headers: headers()
-    }).then(response => {
-        if (response.status >= 200 && response.status < 300) {
-            return Promise.resolve(response);
-        } else {
-            let error = new Error(response.statusText || response.status);
-            error.response = response;
-            return Promise.reject(error)
-        }
-    }).catch(reason => alert(reason))
+    }).then(responseDispatcher)
+        .catch(reason => alert(reason))
+};
+
+export const addTodoAPI = todo => {
+    return fetch('/todos', {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(todo)
+    }).catch(reason => alert(reason));
 };

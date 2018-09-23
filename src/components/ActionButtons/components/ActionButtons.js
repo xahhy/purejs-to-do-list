@@ -3,6 +3,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import {addTodoAPI, fetchAllTodosAPI} from '../../../api';
+import Todo from '../../../data/Todo';
 
 const styles = theme => ({
     button: {
@@ -18,8 +20,9 @@ class ActionButtons extends React.Component {
         this.addItemCallback = this.addItemCallback.bind(this);
     }
 
-    addItemCallback = () =>{
-        this.props.addTodo('');
+    addItemCallback = () => {
+        // this.props.addTodo('');
+        addTodoAPI(new Todo()).then(() => fetchAllTodosAPI(this.props.updateTodos));
     };
 
     render() {

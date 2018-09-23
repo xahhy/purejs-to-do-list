@@ -7,7 +7,7 @@ import {withStyles} from '@material-ui/core/styles';
 import TableHead from '@material-ui/core/TableHead/TableHead';
 import Button from '@material-ui/core/Button/Button';
 import Chip from '@material-ui/core/Chip/Chip';
-import {fetchAllTodos, deleteTodo} from '../../../api'
+import {fetchAllTodosAPI, deleteTodoAPI} from '../../../api'
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 
@@ -33,13 +33,13 @@ const rows = [
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        fetchAllTodos(props.updateTodos);
+        fetchAllTodosAPI(props.updateTodos);
     }
 
     handleDeleteTodo = (id) => {
         // this.props.deleteTodos([id])
         let updateTodos = this.props.updateTodos;
-        deleteTodo(id).then(response=>fetchAllTodos(updateTodos));
+        deleteTodoAPI(id).then(response=>fetchAllTodosAPI(updateTodos));
     };
 
     handleClickDetail = (todo) => {

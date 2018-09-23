@@ -6,7 +6,7 @@ import {
 
 import Login from '../../../data/Login';
 import {Redirect} from 'react-router-dom';
-import {loginUseJWT} from '../../../api';
+import {loginUseJWTAPI} from '../../../api';
 
 const styles = {
     card: {
@@ -16,7 +16,7 @@ const styles = {
 
 class LoginView extends React.Component {
     handleLogin = () => {
-        loginUseJWT(this.usernameRef.value, this.passwordRef.value, this.props.loginWith);
+        loginUseJWTAPI(this.usernameRef.value, this.passwordRef.value, this.props.loginWith);
     };
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/'}};
