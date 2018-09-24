@@ -1,16 +1,18 @@
 import Search from './Search';
 import {connect} from 'react-redux';
-import {filterByDate, filterByName, filterByTags, filterClearAdvanced} from '../../../actions';
+import {filterByDate, filterByName, filterByTags, filterClearAdvanced, updateTodos} from '../../../actions';
 
 const mapStateToProps = (state) => ({
-    tags: state.tags
+    tags: state.tags,
+    filter: state.todos.filter
 });
 
 const mapDispatchToProps = (dispatch, ownProps)=>({
     filterByName: keyWord => dispatch(filterByName(keyWord)),
     filterByDate: (startDate, endDate) => dispatch(filterByDate(startDate, endDate)),
     filterByTags: tags => dispatch(filterByTags(tags)),
-    filterClearAdvanced: () => dispatch(filterClearAdvanced())
+    filterClearAdvanced: () => dispatch(filterClearAdvanced()),
+    updateTodos: (todos) => dispatch(updateTodos(todos)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

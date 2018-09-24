@@ -7,12 +7,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Advanced from './Advanced';
+import {fetchAllTodosAPI} from '../../../api';
 
 class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {keyWord: '', advanced: false}
     }
+    handleSearch = () => {
+        let search = {name: this.state.keyWord};
+        fetchAllTodosAPI(this.props.updateTodos, search);
+    };
 
     handleChangeAdvanced = () => {
         this.setState({advanced: !this.state.advanced});
@@ -21,7 +26,7 @@ class Search extends React.Component {
 
     handleChangeSearch = (event) => {
         this.setState({keyWord: event.target.value});
-        this.props.filterByName(event.target.value);
+        // this.props.filterByName(event.target.value);
     };
 
     render() {
@@ -35,7 +40,7 @@ class Search extends React.Component {
                             id='searchWord'
                             placeholder='Search Word'
                             startAdornment={
-                                <InputAdornment position="start">
+                                <InputAdornment position="start" onClick={this.handleSearch}>
                                     <IconButton>
                                         <SearchIcon/>
                                     </IconButton>

@@ -20,9 +20,12 @@ const responseDispatcher = response => {
 };
 
 /* Todo's API */
-export const fetchAllTodosAPI = (callback) => {
+export const fetchAllTodosAPI = (callback, params) => {
     const token = Cookies.get('token');
-    return fetch('/todos', {
+    const url = new URL('http://localhost/todos');
+    params && Object.keys(params).forEach(key=>url.searchParams.append(key,params[key]));
+
+    return fetch(url.pathname + url.search, {
         method: 'GET',
         headers: headers()
     }).then(responseDispatcher).then(
@@ -57,7 +60,7 @@ export const loginUseJWTAPI = (username, password, callback) => {
         }).catch(reason => alert(reason))
 };
 
-export const deleteTodoAPI = (id) => {
+export const deleteTodoAPI = id => {
     return fetch(`/todos/${id}`, {
         method: 'DELETE',
         headers: headers()
