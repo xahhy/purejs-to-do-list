@@ -35,7 +35,7 @@ export const fetchAllTodosAPI = (callback, params) => {
     ).then(
         response => {
             console.log(response);
-            callback(response.content)
+            callback(response)
         }
     ).catch(reason => console.log(reason))
 };

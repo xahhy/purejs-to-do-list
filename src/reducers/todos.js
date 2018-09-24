@@ -3,7 +3,17 @@ import {isValidDate, STATUS} from '../utils';
 import {fetchAllTodosAPI} from '../api';
 
 const defaultToDos = {
-    todos: [new Todo(0, 'name', STATUS.TODO)],
+    todos: {
+        content: [new Todo(0, 'name', STATUS.TODO)],
+        totalPages: 1,
+        totalElements: 5,
+        last: true,
+        size: 20,
+        number: 0,
+        sort: null,
+        first: true,
+        numberOfElements: 5
+    },
     visible: [0],
     filter: {
         startDate: null,
@@ -11,7 +21,9 @@ const defaultToDos = {
         keyWord: '',
         tags: [],
         order: 'desc',
-        orderBy: 'name'
+        orderBy: 'name',
+        number: 0,
+        size: 5
     }
 };
 
@@ -44,6 +56,7 @@ const filterCombine = (todos, filter) => {
 const todos = (state = defaultToDos, action) => {
     let filter;
     switch (action.type) {
+        /* Not used by API */
         case 'ADD_TODO':
             const todos = [
                 ...state.todos,
@@ -54,6 +67,7 @@ const todos = (state = defaultToDos, action) => {
                 todos,
                 visible: [...state.visible, action.id]
             };
+        /* Not used by API */
         case 'UPDATE_TODO':
             return {
                 ...state,
@@ -66,9 +80,10 @@ const todos = (state = defaultToDos, action) => {
         case 'UPDATE_TODOS':
             return {
                 ...state,
-                todos: action.todos,
-                visible: action.todos.map(todo=>todo.id)
+                todos: action.todos
+                // visible: action.todos.map(todo=>todo.id)
             };
+        /* Not used by API */
         case 'DELETE_TODOS':
             return {
                 ...state,
@@ -108,7 +123,7 @@ const todos = (state = defaultToDos, action) => {
             };
             return {
                 ...state,
-                visible: filterCombine(state.todos, filter).map(todo => todo.id),
+                // visible: filterCombine(state.todos, filter).map(todo => todo.id),
                 filter
             };
         case 'UPDATE_SORT_RULE':
