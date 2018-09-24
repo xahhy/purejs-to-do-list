@@ -15,7 +15,7 @@ class Search extends React.Component {
         this.state = {keyWord: '', advanced: false}
     }
     handleSearch = () => {
-        let {startDate, endDate} = this.props.filter;
+        let {startDate, endDate, tags} = this.props.filter;
         let search = {
             name: this.state.keyWord,
         };
@@ -24,6 +24,9 @@ class Search extends React.Component {
         }
         if (endDate) {
             search = {...search, endDate: endDate.toISODateString()};
+        }
+        if (tags.length !== 0){
+            search = {...search, tagsId: tags}
         }
         fetchAllTodosAPI(this.props.updateTodos, search);
     };

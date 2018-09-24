@@ -36,10 +36,10 @@ class SearchTags extends React.Component{
 
     handleChangeTags = (event) => {
         this.setState({tags: event.target.value});
+        this.props.filterByTags(event.target.value);
     };
 
     componentDidUpdate(){
-        // this.props.filterByTags(this.state.tags);
     }
 
     render() {
@@ -54,25 +54,25 @@ class SearchTags extends React.Component{
                     input={<Input id="select-multiple-tags-for-search"/>}
                     renderValue={selected => (
                         <div>
-                            {selected.map(value => (
-                                <Chip key={value} label={value} className={theme.chip}/>
+                            {selected.map(tagId => tags.find(tag=>tag.id === tagId)).map(tag => (
+                                <Chip key={tag.id} label={tag.name} className={theme.chip}/>
                             ))}
                         </div>
                     )}
                     fullWidth={true}
                 >{
-                    tags.map(name =>
+                    tags.map(tag =>
                         <MenuItem
-                            key={name}
-                            value={name}
+                            key={tag.id}
+                            value={tag.id}
                             style={{
                                 fontWeight:
-                                    this.state.tags.indexOf(name) === -1
+                                    this.state.tags.indexOf(tag.id) === -1
                                         ? theme.typography.fontWeightRegular
                                         : theme.typography.fontWeightMedium,
                             }}
                         >
-                            {name}
+                            {tag.name}
                         </MenuItem>
                     )
                 }
