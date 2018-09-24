@@ -49,10 +49,10 @@ Date.prototype.toISODateString = function(){
 };
 
 export function generateSearchQuery(filter) {
-    let {keyWord, startDate, endDate, tags, order, orderBy, number, size} = filter;
+    let {keyWord, startDate, endDate, tags, order, orderBy, page, size} = filter;
     let search = {
         name: keyWord,
-        number, size
+        page, size
     };
     if (startDate) {
         search = {...search, startDate: startDate.toISODateString()};

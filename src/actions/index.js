@@ -80,3 +80,8 @@ export const updateAllTags = (tags) => ({
     type: 'UPDATE_TAGS',
     tags
 });
+
+export const updateFilter = filter => ({
+    type: 'UPDATE_FILTER',
+    filter
+});

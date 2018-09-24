@@ -33,11 +33,15 @@ class TodoList extends React.Component {
         fetchAllTagsAPI(props.updateAllTags);
     }
     handleChangeRowsPerPage = (event) => {
-
+        let filter = {...this.props.filter, size: event.target.value};
+        this.props.updateFilter(filter);
+        fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter));
     };
 
     handleChangePage = (event, page) => {
-
+        let filter = {...this.props.filter, page};
+        this.props.updateFilter(filter);
+        fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter));
     };
 
     handleDeleteTodo = (id) => {

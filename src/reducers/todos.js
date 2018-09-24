@@ -22,7 +22,7 @@ const defaultToDos = {
         tags: [],
         order: 'desc',
         orderBy: 'name',
-        number: 0,
+        page: 0,
         size: 5
     }
 };
@@ -134,6 +134,15 @@ const todos = (state = defaultToDos, action) => {
             };
             action.callback && action.callback(state.filter);
             return state;
+        case 'UPDATE_PAGE_RULE':
+            return {
+                ...state,
+                filter: {...state.filter, page:action.page, size: action.size}
+            };
+        case 'UPDATE_FILTER':
+            return {
+                ...state, filter:action.filter
+            };
         default:
             break;
     }
