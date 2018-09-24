@@ -14,7 +14,7 @@ import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
 import {withStyles} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import {STATUS} from '../../../utils';
+import {generateSearchQuery, STATUS} from '../../../utils';
 import {fetchAllTodosAPI, updateTodoAPI} from '../../../api';
 import {updateTodos} from '../../../actions';
 
@@ -52,7 +52,7 @@ class Details extends React.Component {
     handleSave = () => {
         // this.props.updateTodo({...this.state.todo});
         let {updateTodos} = this.props;
-        updateTodoAPI(this.state.todo).then(()=>fetchAllTodosAPI(updateTodos));
+        updateTodoAPI(this.state.todo).then(()=>fetchAllTodosAPI(updateTodos, generateSearchQuery(this.props.filter)));
         this.props.toggleDetail(false);
     };
 

@@ -47,7 +47,7 @@ class TodoList extends React.Component {
     handleDeleteTodo = (id) => {
         // this.props.deleteTodos([id])
         let updateTodos = this.props.updateTodos;
-        deleteTodoAPI(id).then(response => fetchAllTodosAPI(updateTodos));
+        deleteTodoAPI(id).then(response => fetchAllTodosAPI(updateTodos, generateSearchQuery(this.props.filter)));
     };
 
     handleClickDetail = (todo) => {

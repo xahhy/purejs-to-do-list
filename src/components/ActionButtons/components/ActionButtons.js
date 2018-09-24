@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {addTodoAPI, fetchAllTodosAPI} from '../../../api';
 import Todo from '../../../data/Todo';
+import {generateSearchQuery} from '../../../utils';
 
 const styles = theme => ({
     button: {
@@ -22,7 +23,7 @@ class ActionButtons extends React.Component {
 
     addItemCallback = () => {
         // this.props.addTodo('');
-        addTodoAPI(new Todo()).then(() => fetchAllTodosAPI(this.props.updateTodos));
+        addTodoAPI(new Todo()).then(() => fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(this.props.filter)));
     };
 
     render() {

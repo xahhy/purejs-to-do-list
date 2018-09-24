@@ -11,7 +11,8 @@ import {
 
 const mapStateToProps = (state, ownProps) => ({
     details: state.details,
-    tags: state.tags
+    tags: state.tags,
+    filter: state.todos.filter
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
