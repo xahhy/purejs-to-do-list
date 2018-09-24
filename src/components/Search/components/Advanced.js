@@ -12,15 +12,19 @@ class Advanced extends React.Component {
     }
 
     handleChangeStartDate = (event) => {
-        this.setState({startDate: new Date(event.target.value)})
+        const startDate = new Date(event.target.value);
+        this.setState({startDate});
+        this.props.filterByDate(startDate, this.state.endDate);
     };
 
     handleChangeEndDate = (event) => {
-        this.setState({endDate: new Date(event.target.value)});
+        const endDate = new Date(event.target.value);
+        this.setState({endDate: endDate});
+        this.props.filterByDate(this.state.startDate, endDate)
     };
 
     componentDidUpdate() {
-        this.props.filterByDate(this.state.startDate, this.state.endDate);
+        // this.props.filterByDate(this.state.startDate, this.state.endDate);
     }
 
     render() {

@@ -15,7 +15,16 @@ class Search extends React.Component {
         this.state = {keyWord: '', advanced: false}
     }
     handleSearch = () => {
-        let search = {name: this.state.keyWord};
+        let {startDate, endDate} = this.props.filter;
+        let search = {
+            name: this.state.keyWord,
+        };
+        if(startDate){
+            search = {...search, startDate:startDate.toISODateString()};
+        }
+        if (endDate) {
+            search = {...search, endDate: endDate.toISODateString()};
+        }
         fetchAllTodosAPI(this.props.updateTodos, search);
     };
 

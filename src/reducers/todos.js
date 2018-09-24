@@ -89,7 +89,7 @@ const todos = (state = defaultToDos, action) => {
             };
             return {
                 ...state,
-                visible: filterCombine(state.todos, filter).map(todo => todo.id),
+                // visible: filterCombine(state.todos, filter).map(todo => todo.id),
                 filter
             };
         case 'FILTER_BY_TAGS':

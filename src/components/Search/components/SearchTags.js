@@ -39,7 +39,7 @@ class SearchTags extends React.Component{
     };
 
     componentDidUpdate(){
-        this.props.filterByTags(this.state.tags);
+        // this.props.filterByTags(this.state.tags);
     }
 
     render() {
