@@ -11,6 +11,7 @@ import {fetchAllTodosAPI, deleteTodoAPI, fetchAllTagsAPI} from '../../../api'
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import {updateAllTags} from '../../../actions';
+import {STATUS} from '../../../utils';
 
 const styles = theme => ({
     table: {
@@ -94,7 +95,7 @@ class TodoList extends React.Component {
                                 {item.dueDate}
                             </TableCell>
                             <TableCell padding='none'>
-                                {item.status}
+                                {STATUS[item.status]}
                             </TableCell>
                             <TableCell>
                                 <Button variant='contained' color='primary'

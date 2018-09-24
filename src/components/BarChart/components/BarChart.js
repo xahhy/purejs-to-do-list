@@ -6,9 +6,9 @@ import {STATUS} from '../../../utils';
 class BarChart extends React.Component {
 
     getBarChartData = (groupedModel) => {
-        let TODONumber = groupedModel[STATUS.TODO] ? groupedModel[STATUS.TODO].length : 0;
-        let DONENumber = groupedModel[STATUS.IN_PROGRESS] ? groupedModel[STATUS.IN_PROGRESS].length : 0;
-        let BLOCKEDNumber = groupedModel[STATUS.BLOCKED] ? groupedModel[STATUS.BLOCKED].length : 0;
+        let TODONumber = groupedModel['TODO'] ? groupedModel['TODO'].length : 0;
+        let DONENumber = groupedModel['IN_PROGRESS'] ? groupedModel['IN_PROGRESS'].length : 0;
+        let BLOCKEDNumber = groupedModel['BLOCKED'] ? groupedModel['BLOCKED'].length : 0;
         return {
             TODONumber, DONENumber, BLOCKEDNumber
         }

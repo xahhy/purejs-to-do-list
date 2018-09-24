@@ -141,9 +141,9 @@ class Details extends React.Component {
                                     id: 'todo-status',
                                 }}
                             >
-                                <MenuItem value={STATUS.TODO}>{STATUS.TODO}</MenuItem>
-                                <MenuItem value={STATUS.IN_PROGRESS}>{STATUS.IN_PROGRESS}</MenuItem>
-                                <MenuItem value={STATUS.BLOCKED}>{STATUS.BLOCKED}</MenuItem>
+                                <MenuItem value={'TODO'}>{STATUS.TODO}</MenuItem>
+                                <MenuItem value={'IN_PROGRESS'}>{STATUS.IN_PROGRESS}</MenuItem>
+                                <MenuItem value={'BLOCKED'}>{STATUS.BLOCKED}</MenuItem>
                             </Select>
                         </Grid>
                         <Grid item xs={12}>
