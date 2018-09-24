@@ -1,5 +1,6 @@
 import Todo from '../data/Todo';
 import {isValidDate, STATUS} from '../utils';
+import {fetchAllTodosAPI} from '../api';
 
 const defaultToDos = {
     todos: [new Todo(0, 'name', STATUS.TODO)],
@@ -80,7 +81,7 @@ const todos = (state = defaultToDos, action) => {
             };
             return {
                 ...state,
-                visible: filterCombine(state.todos, filter).map(todo => todo.id),
+                // visible: filterCombine(state.todos, filter).map(todo => todo.id),
                 filter
             };
         case 'FILTER_BY_DATE':
@@ -111,15 +112,13 @@ const todos = (state = defaultToDos, action) => {
                 filter
             };
         case 'UPDATE_SORT_RULE':
-            const orderBy = action.property;
-            let order = 'desc';
-            if (state.filter.orderBy === action.property && state.filter.order === 'desc') {
-                order = 'asc';
-            }
-            return {
+            const {property:orderBy, direction:order} = action;
+            state = {
                 ...state,
                 filter: {...state.filter, orderBy, order}
             };
+            action.callback && action.callback(state.filter);
+            return state;
         default:
             break;
     }

@@ -47,3 +47,23 @@ export const groupByDueDate = (todos) => {
 Date.prototype.toISODateString = function(){
     return isNaN(this) ? '' : this.toISOString().slice(0,10);
 };
+
+export function generateSearchQuery(filter) {
+    let {keyWord, startDate, endDate, tags, order, orderBy } = filter;
+    let search = {
+        name: keyWord,
+    };
+    if (startDate) {
+        search = {...search, startDate: startDate.toISODateString()};
+    }
+    if (endDate) {
+        search = {...search, endDate: endDate.toISODateString()};
+    }
+    if (tags.length !== 0) {
+        search = {...search, tagsId: tags}
+    }
+    if (order && orderBy){
+        search = {...search, sort: `${orderBy},${order}`}
+    }
+    return search;
+}

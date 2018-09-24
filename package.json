@@ -61,6 +61,7 @@
     "react-router-dom": "^4.3.1",
     "react-svg-piechart": "^2.1.1",
     "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "resolve": "1.6.0",
     "shortid": "^2.2.13",
     "style-loader": "0.19.0",

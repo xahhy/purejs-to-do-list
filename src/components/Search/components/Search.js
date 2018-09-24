@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Advanced from './Advanced';
 import {fetchAllTodosAPI} from '../../../api';
+import {generateSearchQuery} from '../../../utils';
+
 
 class Search extends React.Component {
     constructor(props) {
@@ -15,19 +17,7 @@ class Search extends React.Component {
         this.state = {keyWord: '', advanced: false}
     }
     handleSearch = () => {
-        let {startDate, endDate, tags} = this.props.filter;
-        let search = {
-            name: this.state.keyWord,
-        };
-        if(startDate){
-            search = {...search, startDate:startDate.toISODateString()};
-        }
-        if (endDate) {
-            search = {...search, endDate: endDate.toISODateString()};
-        }
-        if (tags.length !== 0){
-            search = {...search, tagsId: tags}
-        }
+        let search = generateSearchQuery(this.props.filter);
         fetchAllTodosAPI(this.props.updateTodos, search);
     };
 
@@ -38,7 +28,7 @@ class Search extends React.Component {
 
     handleChangeSearch = (event) => {
         this.setState({keyWord: event.target.value});
-        // this.props.filterByName(event.target.value);
+        this.props.filterByName(event.target.value);
     };
 
     render() {

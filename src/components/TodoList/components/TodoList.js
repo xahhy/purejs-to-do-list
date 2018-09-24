@@ -11,7 +11,7 @@ import {fetchAllTodosAPI, deleteTodoAPI, fetchAllTagsAPI} from '../../../api'
 import Tooltip from '@material-ui/core/Tooltip';
 import TableSortLabel from '@material-ui/core/TableSortLabel/TableSortLabel';
 import {updateAllTags} from '../../../actions';
-import {STATUS} from '../../../utils';
+import {generateSearchQuery, STATUS} from '../../../utils';
 
 const styles = theme => ({
     table: {
@@ -27,8 +27,8 @@ const styles = theme => ({
 const rows = [
     {id: 'name', enableSort: true, disablePadding: true, label: 'Action'},
     {id: 'tags', enableSort: false, disablePadding: true, label: 'Tags'},
-    {id: 'dueDate', enableSort: false, disablePadding: true, label: 'DueDate'},
-    {id: 'status', enableSort: false, disablePadding: true, label: 'Status'},
+    {id: 'dueDate', enableSort: true, disablePadding: true, label: 'DueDate'},
+    {id: 'status', enableSort: true, disablePadding: true, label: 'Status'},
     {id: 'actions', enableSort: false, disablePadding: true, label: 'Actions'}
 ];
 
@@ -52,8 +52,13 @@ class TodoList extends React.Component {
 
     createSortHandler = (property) => {
         console.log(property);
-        this.props.updateSortRule(property)
+        let direction = 'desc';
+        if (this.props.filter.orderBy === property && this.props.filter.order === 'desc') {
+            direction = 'asc';
+        }
+        this.props.updateSortRule(property, direction, (filter)=>fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter)));
     };
+
     render() {
         const {classes, tags} = this.props;
         const {order, orderBy} = this.props.filter;

@@ -65,9 +65,9 @@ export const filterClearAdvanced = ()=>({
     type: 'FILTER_CLEAR_ADVANCED'
 });
 
-export const updateSortRule = (property) => ({
+export const updateSortRule = (property, direction, callback) => ({
     type: 'UPDATE_SORT_RULE',
-    property
+    property,direction,callback
 });
 
 export const loginWith = (login) => ({

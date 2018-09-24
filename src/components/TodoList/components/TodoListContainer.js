@@ -12,7 +12,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => ({
     todos: state.todos,
-    tags: state.tags
+    tags: state.tags,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -23,7 +23,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     toggleDetail: show => dispatch(toggleDetail(show)),
     setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo)),
     updateTodos: (todos) => dispatch(updateTodos(todos)),
-    updateSortRule: (property) => dispatch(updateSortRule(property)),
+    updateSortRule: (property, direction, callback) => {
+        return dispatch(updateSortRule(property, direction, callback));
+    },
     updateAllTags: (tags) => dispatch(updateAllTags(tags))
 });
 
