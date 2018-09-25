@@ -50,9 +50,7 @@ class Details extends React.Component {
     };
 
     handleSave = () => {
-        // this.props.updateTodo({...this.state.todo});
-        let {updateTodos} = this.props;
-        updateTodoAPI(this.state.todo).then(()=>fetchAllTodosAPI(updateTodos, generateSearchQuery(this.props.filter)));
+        this.props.updateTodo({...this.state.todo}, this.props.filter);
         this.props.toggleDetail(false);
     };
 

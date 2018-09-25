@@ -16,7 +16,7 @@ const styles = {
 
 class LoginView extends React.Component {
     handleLogin = () => {
-        loginUseJWTAPI(this.usernameRef.value, this.passwordRef.value, this.props.loginWith);
+        this.props.loginWith(this.usernameRef.value, this.passwordRef.value);
     };
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/'}};

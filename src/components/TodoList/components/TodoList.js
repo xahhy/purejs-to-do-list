@@ -29,25 +29,23 @@ const rows = [
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        fetchAllTodosAPI(props.updateTodos, generateSearchQuery(props.filter));
-        fetchAllTagsAPI(props.updateAllTags);
+        props.updateTodos(props.filter);
+        props.updateAllTags();
     }
     handleChangeRowsPerPage = (event) => {
         let filter = {...this.props.filter, size: event.target.value};
         this.props.updateFilter(filter);
-        fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter));
+        this.props.updateTodos(filter);
     };
 
     handleChangePage = (event, page) => {
         let filter = {...this.props.filter, page};
         this.props.updateFilter(filter);
-        fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter));
+        this.props.updateTodos(filter);
     };
 
     handleDeleteTodo = (id) => {
-        // this.props.deleteTodos([id])
-        let updateTodos = this.props.updateTodos;
-        deleteTodoAPI(id).then(response => fetchAllTodosAPI(updateTodos, generateSearchQuery(this.props.filter)));
+        this.props.deleteTodos([id], this.props.filter);
     };
 
     handleClickDetail = (todo) => {
@@ -61,7 +59,7 @@ class TodoList extends React.Component {
         if (this.props.filter.orderBy === property && this.props.filter.order === 'desc') {
             direction = 'asc';
         }
-        this.props.updateSortRule(property, direction, (filter) => fetchAllTodosAPI(this.props.updateTodos, generateSearchQuery(filter)));
+        this.props.updateSortRule(property, direction, (filter) => fetchAllTodosAPI(generateSearchQuery(filter)));
     };
 
     render() {

@@ -18,7 +18,7 @@ class Search extends React.Component {
     }
     handleSearch = () => {
         let search = generateSearchQuery(this.props.filter);
-        fetchAllTodosAPI(this.props.updateTodos, search);
+        fetchAllTodosAPI(search);
     };
 
     handleChangeAdvanced = () => {

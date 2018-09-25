@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import ActionButtons from './ActionButtons'
 import {addTodo, deleteTodos, updateTodos} from '../../../actions/index';
+import {addTodoAPI, fetchAllTodosAPI} from '../../../api';
+import {generateSearchQuery} from '../../../utils';
 
 const mapStateToProps = (state, ownProps) => ({
     selected: state.selected,
@@ -8,8 +10,13 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addTodo: name => dispatch(addTodo(name)),
-    updateTodos: (todos) => dispatch(updateTodos(todos))
+    addTodo: (todo, filter) => {
+        addTodoAPI(todo).then(response=>fetchAllTodosAPI(generateSearchQuery(filter)))
+            .then(response=>dispatch(updateTodos(response)))
+    },
+    updateTodos: (filter) => {
+        fetchAllTodosAPI(generateSearchQuery(filter)).then(response => dispatch(updateTodos(response)));
+    }
 });
 
 export default connect(

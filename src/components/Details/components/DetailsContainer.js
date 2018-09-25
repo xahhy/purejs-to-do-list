@@ -8,6 +8,8 @@ import {
     updateTodo,
     updateTodos
 } from '../../../actions';
+import {fetchAllTodosAPI, updateTodoAPI} from '../../../api';
+import {generateSearchQuery} from '../../../utils';
 
 const mapStateToProps = (state, ownProps) => ({
     details: state.details,
@@ -16,9 +18,14 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateTodo: (todo) => dispatch(updateTodo(todo)),
+    updateTodo: (todo, filter) => {
+        updateTodoAPI(todo).then(response=>fetchAllTodosAPI(generateSearchQuery(filter)))
+            .then(response => dispatch(updateTodos(response)));
+    },
     toggleDetail: show => dispatch(toggleDetail(show)),
-    updateTodos: (todos) => dispatch(updateTodos(todos))
+    updateTodos: (filter) => {
+        fetchAllTodosAPI(generateSearchQuery(filter)).then(response => dispatch(updateTodos(response)));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details)

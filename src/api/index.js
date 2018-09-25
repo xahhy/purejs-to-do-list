@@ -20,10 +20,10 @@ const responseDispatcher = response => {
 };
 
 /* Todo's API */
-export const fetchAllTodosAPI = (callback, params) => {
+export const fetchAllTodosAPI = params => {
     const token = Cookies.get('token');
     const url = new URL('http://localhost/todos');
-    params && Object.keys(params).forEach(key=>url.searchParams.append(key,params[key]));
+    params && Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     return fetch(url.pathname + url.search, {
         method: 'GET',
@@ -32,15 +32,10 @@ export const fetchAllTodosAPI = (callback, params) => {
         response => {
             return response.json();
         }
-    ).then(
-        response => {
-            console.log(response);
-            callback(response)
-        }
     ).catch(reason => console.log(reason))
 };
 
-export const loginUseJWTAPI = (username, password, callback) => {
+export const loginUseJWTAPI = (username, password) => {
     return fetch('/login', {
         method: 'POST',
         headers: {
@@ -56,7 +51,7 @@ export const loginUseJWTAPI = (username, password, callback) => {
             const login = new Login(username);
             login.isLogin = true;
             login.token = response;
-            callback && callback(login);
+            return login;
         }).catch(reason => alert(reason))
 };
 
@@ -85,12 +80,10 @@ export const updateTodoAPI = todo => {
 };
 
 /* Tags API */
-export const fetchAllTagsAPI = (callback) => {
+export const fetchAllTagsAPI = () => {
     return fetch('/tags', {
         method: 'GET',
         headers: headers()
     }).then(responseDispatcher).then(response => response.json())
-        .then(response => {
-            return callback(response);
-        }).catch(reason => alert(reason));
+        .catch(reason => alert(reason));
 };
