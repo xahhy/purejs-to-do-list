@@ -2,10 +2,10 @@ import Cookies from 'js-cookie';
 import Login from '../data/Login';
 
 /* Util functions*/
-const headers = () => {
+const headers = (token) => {
     return {
         'Content-Type': 'application/json',
-        'Authorization': Cookies.get('token')
+        'Authorization': token
     }
 };
 
@@ -20,14 +20,13 @@ const responseDispatcher = response => {
 };
 
 /* Todo's API */
-export const fetchAllTodosAPI = params => {
-    const token = Cookies.get('token');
+export const fetchAllTodosAPI = (params, token) => {
     const url = new URL('http://localhost/todos');
     params && Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     return fetch(url.pathname + url.search, {
         method: 'GET',
-        headers: headers()
+        headers: headers(token)
     }).then(responseDispatcher).then(
         response => {
             return response.json();
@@ -55,35 +54,35 @@ export const loginUseJWTAPI = (username, password) => {
         }).catch(reason => alert(reason))
 };
 
-export const deleteTodoAPI = id => {
+export const deleteTodoAPI = (id, token) => {
     return fetch(`/todos/${id}`, {
         method: 'DELETE',
-        headers: headers()
+        headers: headers(token)
     }).then(responseDispatcher)
         .catch(reason => alert(reason))
 };
 
-export const addTodoAPI = todo => {
+export const addTodoAPI = (todo, token) => {
     return fetch('/todos', {
         method: 'POST',
-        headers: headers(),
+        headers: headers(token),
         body: JSON.stringify(todo)
     }).then(responseDispatcher).catch(reason => alert(reason));
 };
 
-export const updateTodoAPI = todo => {
+export const updateTodoAPI = (todo, token) => {
     return fetch(`/todos/${todo.id}`, {
         method: 'PUT',
-        headers: headers(),
+        headers: headers(token),
         body: JSON.stringify(todo)
     }).then(responseDispatcher).catch(reason => alert(reason))
 };
 
 /* Tags API */
-export const fetchAllTagsAPI = () => {
+export const fetchAllTagsAPI = (token) => {
     return fetch('/tags', {
         method: 'GET',
-        headers: headers()
+        headers: headers(token)
     }).then(responseDispatcher).then(response => response.json())
         .catch(reason => alert(reason));
 };

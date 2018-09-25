@@ -29,23 +29,23 @@ const rows = [
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        props.updateTodos(props.filter);
-        props.updateAllTags();
+        props.updateTodos(props.filter, props.login.token);
+        props.updateAllTags(props.login.token);
     }
     handleChangeRowsPerPage = (event) => {
         let filter = {...this.props.filter, size: event.target.value};
-        this.props.updateFilter(filter);
-        this.props.updateTodos(filter);
+        this.props.updateFilter(filter, this.props.login.token);
+        this.props.updateTodos(filter, this.props.login.token);
     };
 
     handleChangePage = (event, page) => {
         let filter = {...this.props.filter, page};
-        this.props.updateFilter(filter);
-        this.props.updateTodos(filter);
+        this.props.updateFilter(filter, this.props.login.token);
+        this.props.updateTodos(filter, this.props.login.token);
     };
 
     handleDeleteTodo = (id) => {
-        this.props.deleteTodos([id], this.props.filter);
+        this.props.deleteTodos([id], this.props.filter, this.props.login.token);
     };
 
     handleClickDetail = (todo) => {

@@ -17,7 +17,7 @@ class Search extends React.Component {
         this.state = {keyWord: '', advanced: false}
     }
     handleSearch = () => {
-        this.props.updateTodos(this.props.filter)
+        this.props.updateTodos(this.props.filter, this.props.login.token)
     };
 
     handleChangeAdvanced = () => {
@@ -54,6 +54,7 @@ class Search extends React.Component {
                             <Input
                             id='searchWord'
                             placeholder='Search Word'
+                            autoFocus={true}
                             startAdornment={
                                 <InputAdornment position="start" onClick={this.handleSearch} >
                                     <IconButton>
@@ -66,7 +67,7 @@ class Search extends React.Component {
                         />
                         </Grid>
                         <Grid item>
-                            <Button color="primary" onClick={this.handleChangeAdvanced}>
+                            <Button color="primary" onClick={this.handleChangeAdvanced} disableFocusRipple={true} disableRipple={true}>
                                 Advanced
                             </Button>
                         </Grid>

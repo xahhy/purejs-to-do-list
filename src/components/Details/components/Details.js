@@ -52,9 +52,9 @@ class Details extends React.Component {
     handleSave = () => {
         const todo = this.state.todo;
         if(todo.id !== undefined){
-            this.props.updateTodo({...this.state.todo}, this.props.filter);
+            this.props.updateTodo({...this.state.todo}, this.props.filter, this.props.login.token);
         }else {
-            this.props.addTodo(todo, this.props.filter);
+            this.props.addTodo(todo, this.props.filter, this.props.login.token);
         }
         this.props.toggleDetail(false);
     };

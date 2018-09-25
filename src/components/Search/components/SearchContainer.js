@@ -6,7 +6,8 @@ import {generateSearchQuery} from '../../../utils';
 
 const mapStateToProps = (state) => ({
     tags: state.tags,
-    filter: state.todos.filter
+    filter: state.todos.filter,
+    login: state.login
 });
 
 const mapDispatchToProps = (dispatch, ownProps)=>({
@@ -14,8 +15,8 @@ const mapDispatchToProps = (dispatch, ownProps)=>({
     filterByDate: (startDate, endDate) => dispatch(filterByDate(startDate, endDate)),
     filterByTags: tags => dispatch(filterByTags(tags)),
     filterClearAdvanced: () => dispatch(filterClearAdvanced()),
-    updateTodos: (filter) => {
-        fetchAllTodosAPI(generateSearchQuery(filter))
+    updateTodos: (filter, token) => {
+        fetchAllTodosAPI(generateSearchQuery(filter), token)
             .then(response => dispatch(updateTodos(response)))
     },
 });

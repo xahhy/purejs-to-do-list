@@ -6,13 +6,11 @@ import {generateSearchQuery} from '../../../utils';
 
 const mapStateToProps = (state, ownProps) => ({
     selected: state.selected,
-    filter: state.todos.filter
+    filter: state.todos.filter,
+    login: state.login
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateTodos: (filter) => {
-        fetchAllTodosAPI(generateSearchQuery(filter)).then(response => dispatch(updateTodos(response)));
-    },
     toggleDetail: show => dispatch(toggleDetail(show)),
     setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo)),
 });

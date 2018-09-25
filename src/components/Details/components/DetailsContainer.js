@@ -14,21 +14,22 @@ import {generateSearchQuery} from '../../../utils';
 const mapStateToProps = (state, ownProps) => ({
     details: state.details,
     tags: state.tags,
-    filter: state.todos.filter
+    filter: state.todos.filter,
+    login: state.login
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    updateTodo: (todo, filter) => {
-        updateTodoAPI(todo).then(response=>fetchAllTodosAPI(generateSearchQuery(filter)))
+    updateTodo: (todo, filter, token) => {
+        updateTodoAPI(todo, token).then(response=>fetchAllTodosAPI(generateSearchQuery(filter), token))
             .then(response => dispatch(updateTodos(response)));
     },
-    addTodo: (todo, filter) => {
-        addTodoAPI(todo).then(response=>fetchAllTodosAPI(generateSearchQuery(filter)))
+    addTodo: (todo, filter, token) => {
+        addTodoAPI(todo, token).then(response=>fetchAllTodosAPI(generateSearchQuery(filter), token))
             .then(response=>dispatch(updateTodos(response)))
     },
     toggleDetail: show => dispatch(toggleDetail(show)),
-    updateTodos: (filter) => {
-        fetchAllTodosAPI(generateSearchQuery(filter)).then(response => dispatch(updateTodos(response)));
+    updateTodos: (filter, token) => {
+        fetchAllTodosAPI(generateSearchQuery(filter), token).then(response => dispatch(updateTodos(response)));
     }
 });
 

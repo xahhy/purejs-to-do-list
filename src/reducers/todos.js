@@ -119,7 +119,7 @@ const todos = (state = defaultToDos, action) => {
             };
         case 'FILTER_CLEAR_ADVANCED':
             filter = {
-                ...defaultToDos, keyWord: state.filter.keyWord
+                ...defaultToDos.filter, keyWord: state.filter.keyWord
             };
             return {
                 ...state,
