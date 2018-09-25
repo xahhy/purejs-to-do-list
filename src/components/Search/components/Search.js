@@ -17,8 +17,7 @@ class Search extends React.Component {
         this.state = {keyWord: '', advanced: false}
     }
     handleSearch = () => {
-        let search = generateSearchQuery(this.props.filter);
-        fetchAllTodosAPI(search);
+        this.props.updateTodos(this.props.filter)
     };
 
     handleChangeAdvanced = () => {
@@ -31,6 +30,20 @@ class Search extends React.Component {
         this.props.filterByName(event.target.value);
     };
 
+    handleKeyDown = (event) => {
+        if(event.keyCode === 13) {
+            this.handleSearch();
+        }
+    };
+
+    componentDidMount(){
+        document.addEventListener("keydown", this.handleKeyDown, false);
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.handleKeyDown, false);
+    }
+
     render() {
         const {advanced, keyWord} = this.state;
         return (
@@ -42,7 +55,7 @@ class Search extends React.Component {
                             id='searchWord'
                             placeholder='Search Word'
                             startAdornment={
-                                <InputAdornment position="start" onClick={this.handleSearch}>
+                                <InputAdornment position="start" onClick={this.handleSearch} >
                                     <IconButton>
                                         <SearchIcon/>
                                     </IconButton>
