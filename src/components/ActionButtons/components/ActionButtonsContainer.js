@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ActionButtons from './ActionButtons'
-import {addTodo, deleteTodos, updateTodos} from '../../../actions/index';
+import {addTodo, deleteTodos, setCurrentTodoForDetail, toggleDetail, updateTodos} from '../../../actions/index';
 import {addTodoAPI, fetchAllTodosAPI} from '../../../api';
 import {generateSearchQuery} from '../../../utils';
 
@@ -10,13 +10,11 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addTodo: (todo, filter) => {
-        addTodoAPI(todo).then(response=>fetchAllTodosAPI(generateSearchQuery(filter)))
-            .then(response=>dispatch(updateTodos(response)))
-    },
     updateTodos: (filter) => {
         fetchAllTodosAPI(generateSearchQuery(filter)).then(response => dispatch(updateTodos(response)));
-    }
+    },
+    toggleDetail: show => dispatch(toggleDetail(show)),
+    setCurrentTodoForDetail: todo => dispatch(setCurrentTodoForDetail(todo)),
 });
 
 export default connect(

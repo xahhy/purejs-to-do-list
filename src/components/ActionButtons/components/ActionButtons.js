@@ -22,7 +22,8 @@ class ActionButtons extends React.Component {
     }
 
     addItemCallback = () => {
-        this.props.addTodo(new Todo(), this.props.filter);
+        this.props.setCurrentTodoForDetail(new Todo());
+        this.props.toggleDetail(true);
     };
 
     render() {
