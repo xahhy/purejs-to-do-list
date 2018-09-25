@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card/Card';
 import {
-    TextField,CardContent,CardActions,Button
+    TextField, CardContent, CardActions, Button
 } from '@material-ui/core';
 
 import Login from '../../../data/Login';
@@ -18,6 +18,21 @@ class LoginView extends React.Component {
     handleLogin = () => {
         this.props.loginWith(this.usernameRef.value, this.passwordRef.value);
     };
+
+    handleKeyDown = (event) => {
+        if (event.keyCode === 13){
+            this.handleLogin();
+        }
+    };
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyDown, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown, false);
+    }
+
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/'}};
         if (this.props.login.isLogin && from.pathname !== '/logout') {
@@ -31,14 +46,14 @@ class LoginView extends React.Component {
                         label='username'
                         placeholder='Please enter username here'
                         fullWidth={true}
-                        inputRef={ref=>this.usernameRef = ref}
+                        inputRef={ref => this.usernameRef = ref}
                     />
                     <TextField
                         id='password'
                         type='password'
                         label='password'
                         fullWidth={true}
-                        inputRef={ref=>this.passwordRef = ref}
+                        inputRef={ref => this.passwordRef = ref}
                     />
                 </CardContent>
                 <CardActions style={{justifyContent: 'flex-end'}}>
