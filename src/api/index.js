@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import Login from '../data/Login';
 
+const proxyUrl = 'http://localhost';
 /* Util functions*/
 const headers = (token) => {
     return {
@@ -21,7 +22,7 @@ const responseDispatcher = response => {
 
 /* Todo's API */
 export const fetchAllTodosAPI = (params, token) => {
-    const url = new URL('http://localhost/todos');
+    const url = new URL('/todos', proxyUrl);
     params && Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     return fetch(url.pathname + url.search, {
@@ -41,7 +42,7 @@ export const loginUseJWTAPI = (username, password) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: username,
+            username,
             password
         })
     }).then(responseDispatcher).then(response => response.text())
