@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import Login from '../data/Login';
 
-const proxyUrl = 'http://localhost';
+const proxyUrl = 'http://'+window.location.hostname;
 /* Util functions*/
 const headers = (token) => {
     return {
@@ -22,7 +22,7 @@ const responseDispatcher = response => {
 
 /* Todo's API */
 export const fetchAllTodosAPI = (params, token) => {
-    const url = new URL('/todos', proxyUrl);
+    const url = new URL('/api/todos', proxyUrl);
     params && Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     return fetch(url.pathname + url.search, {
@@ -36,7 +36,7 @@ export const fetchAllTodosAPI = (params, token) => {
 };
 
 export const loginUseJWTAPI = (username, password) => {
-    return fetch('/login', {
+    return fetch('/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ export const loginUseJWTAPI = (username, password) => {
 };
 
 export const deleteTodoAPI = (id, token) => {
-    return fetch(`/todos/${id}`, {
+    return fetch(`/api/todos/${id}`, {
         method: 'DELETE',
         headers: headers(token)
     }).then(responseDispatcher)
@@ -64,7 +64,7 @@ export const deleteTodoAPI = (id, token) => {
 };
 
 export const addTodoAPI = (todo, token) => {
-    return fetch('/todos', {
+    return fetch('/api/todos', {
         method: 'POST',
         headers: headers(token),
         body: JSON.stringify(todo)
@@ -72,7 +72,7 @@ export const addTodoAPI = (todo, token) => {
 };
 
 export const updateTodoAPI = (todo, token) => {
-    return fetch(`/todos/${todo.id}`, {
+    return fetch(`/api/todos/${todo.id}`, {
         method: 'PUT',
         headers: headers(token),
         body: JSON.stringify(todo)
@@ -81,7 +81,7 @@ export const updateTodoAPI = (todo, token) => {
 
 /* Tags API */
 export const fetchAllTagsAPI = (token) => {
-    return fetch('/tags', {
+    return fetch('/api/tags', {
         method: 'GET',
         headers: headers(token)
     }).then(responseDispatcher).then(response => response.json())
