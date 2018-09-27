@@ -132,7 +132,6 @@ const todos = (state = defaultToDos, action) => {
                 ...state,
                 filter: {...state.filter, orderBy, order}
             };
-            action.callback && action.callback(state.filter);
             return state;
         case 'UPDATE_PAGE_RULE':
             return {

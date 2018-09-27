@@ -32,7 +32,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     updateTodos: (filter, token) => {
         fetchAllTodosAPI(generateSearchQuery(filter), token).then(response => dispatch(updateTodos(response)));
     },
-    updateSortRule: (property, direction, callback) => dispatch(updateSortRule(property, direction, callback)),
+    updateSortRule: (property, direction, filter, token) => {
+        fetchAllTodosAPI(generateSearchQuery(filter), token)
+            .then(response=>dispatch(updateTodos(response)))
+            .then(response=>dispatch(updateSortRule(property, direction)))
+    },
     updateAllTags: (token) => {
         fetchAllTagsAPI(token).then(tags => dispatch(updateAllTags(tags)));
     },

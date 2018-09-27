@@ -59,7 +59,8 @@ class TodoList extends React.Component {
         if (this.props.filter.orderBy === property && this.props.filter.order === 'desc') {
             direction = 'asc';
         }
-        this.props.updateSortRule(property, direction, (filter) => fetchAllTodosAPI(generateSearchQuery(filter)));
+        const filter =  {...this.props.filter, orderBy:property, order:direction};
+        this.props.updateSortRule(property, direction, filter, this.props.login.token);
     };
 
     render() {

@@ -118,5 +118,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://192.168.0.137:8088"
+  "proxy": "http://10.205.22.120:8088"
 }
